@@ -1,4 +1,20 @@
 {
+  "name": "helloapp",
+  "version": "1.0.0",
+  "description": "node app ",
+  "main": "hello_app.js",
+  "scripts": {
+       "start": "node template-app.js"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/radang2014/cs120-final"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+      "url": ""
+  },
   "dependencies": {
     "mongodb": "^6.5.0"
   }
