@@ -74,8 +74,8 @@ exports.serve_events_content = async function(req, res) {
         return
     })
     .then( _ =>        {
-            res.end($.html())
-        })
+        res.write($.html())
+    })
     
 }
 
