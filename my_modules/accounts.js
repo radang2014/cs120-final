@@ -102,6 +102,7 @@ exports.show_profile = async function(req, res) {
 exports.show_profile_pic = async function(req, res) {
     var common = require('./common_module.js');
     var mongo_query = require('./mongo_query.js');
+    var fs = require('fs');
 
     /* Just show default picture if not logged in */
     if (logged_in_username == null) {
@@ -110,7 +111,17 @@ exports.show_profile_pic = async function(req, res) {
         var account_info = await mongo_query.get_account_info(req, res, logged_in_username);
 
         /* Write profile picture */
-        common.dump_img(req, res, "uploads/" + account_info.icon_filename);
+        if (fs.existsSync("uploads/" + account_info.icon_filename)) {
+            common.dump_img(req, res, "uploads/" + account_info.icon_filename);
+        } else {
+            /* 
+             * Show default image if image file does not exist.
+             * 
+             * One way we can have a nonexistant image is if we're running the app from a different 
+             * device than where it was deployed.
+             */
+            common.dump_img(req, res, "uploads/" + DEFAULT_PROFILE_PIC);
+        }
     }
 }
 
