@@ -9,6 +9,7 @@ var common = require('./my_modules/common_module.js');
 
 /* Import modules containing page-specific functionality */
 var accounts = require('./my_modules/accounts.js');
+var ads = require('./my_modules/advertisements.js');
 
 http.createServer(async function(req, res) {
     var urlObj = url.parse(req.url, true);
@@ -26,6 +27,8 @@ http.createServer(async function(req, res) {
             common.send_redirect(req, res, "/");
         }
     }
+
+    /***** ACCOUNT RELATED PAGES *****/
 
     /* Account Creation Page */
     if (urlObj.pathname == "/create_account") {
@@ -78,6 +81,21 @@ http.createServer(async function(req, res) {
     /* Delete Account */
     if (urlObj.pathname == "/delete_account") {
         await accounts.process_delete(req, res);
+    }
+
+    /***** ADVERTISEMENT RELATED PAGES *****/
+
+    /* Create Advertisement */
+    if (urlObj.pathname == "/create_ad") {
+        await common.dump_file(req, res, "pages/advertisements/create_ad.html");
+    }
+    if (urlObj.pathname == "/process_create_ad") {
+        await ads.process_create(req, res);
+    }
+
+    /* View Advertisements by Tier -- this "view" was built for testing purposes only */
+    if (urlObj.pathname == "/view_ads") {
+        await ads.show_ads_by_tier(req, res);
     }
 
     res.end();

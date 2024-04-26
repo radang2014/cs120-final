@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercise Matching App</title>
+        <meta http-equiv="description" content="HTML Template" />
+        <meta http-equiv="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Import Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+
+        <!-- CSS -->
+        <style type="text/css"></style>
+    </head>
+    <body>
+        <h1>Exercise Matching App</h1>
+
+        <p>Please submit your information below!</p>
+        
+        <form name="create_ad" method="get" action="process_create_ad" onsubmit="return validate()">
+            <div>
+                Business Name: <input type="text" name="name" />
+            </div>
+
+            <div>
+                Business Website URL: <input type="text" name="website" />
+            </div>
+
+            <div>
+                Address Line 1: <input type="text" name="addr1" />
+            </div>
+
+            <div>
+                Address Line 2: <input type="text" name="addr2" />
+            </div>
+
+            <div>
+                City: <input type="text" name="city" />
+                State: <input type="text" name="state" />
+                Zip: <input type="text" name="zip" />
+            </div>
+
+            <div>Tell Us About Your Venue:</div>
+            <textarea name="description" cols="50" rows="7"></textarea>
+
+            <div>
+                Tags for Common Exercises at Your Venue (please separate each tag with a single comma): <br />
+                (e.g. "swimming, biking") <br />
+                <input type="text" name="exercises" />
+            </div>
+
+            <p>
+                Please select your pay tier below. Your pay tier affects the level of priority that your 
+                advertisement will be given compared to other advertisements. Your business will receive 
+                a bill within three business days.
+            </p>
+            
+            <select name="pay_tier">
+                <option value="1" selected>Tier 1 - $200</option>
+                <option value="2">Tier 2 - $80</option>
+                <option value="3">Tier 3 - $55</option>
+                <option value="4">Tier 4 - $30</option>
+                <option value="5">Tier 5 - $10</option>
+            </select>
+
+            <br /><br />
+
+            <input type="submit" value="Submit Advertisement" />
+        </form>
+
+        <a href="/logged_in">Return to Home</a>
+
+        <script>
+            /* Form validation function */ 
+            function validate() {
+                var form = document.forms["create_ad"];
+
+                /* Ensure business name is filled */ 
+                if (form["name"].value.trim() == "") {
+                    alert("ERROR: Business Name cannot be empty");
+                    return false;
+                }
+
+                /* Ensure address is filled */ 
+                if (form["addr1"].value.trim() == "" || form["city"].value.trim() == "" || 
+                    form["state"].value.trim() == "" || form["zip"].value.trim() == "") {
+                    alert("ERROR: Address must include a Line 1, City, State, and Zip Code");
+                    return false;
+                }
+                /* Ensure zip code is properly formatted */ 
+                if (!is_zipcode(form["zip"].value)) {
+                    alert("ERROR: Zip code must be composed of exactly five digits");
+                    return false;
+                }
+            }
+
+            function is_digit(c) {
+                return c >= '0' && c <= '9';
+            }
+
+            function is_zipcode(zip) {
+                if (zip.length != 5) {
+                    return false;
+                }
+                for (var i = 0; i < 5; i++) {
+                    if (!is_digit(zip.charAt(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        </script>
+    </body>
+</html>

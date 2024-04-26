@@ -17,7 +17,8 @@ const LOCATIONS_COLL = "location";
 const LOCATION_RATINGS_COLL = "location_rating";
 
 /* Miscellaneous variables */
-const DEFAULT_PROFILE_PIC = "default_profile_pic.jpg"
+const DEFAULT_PROFILE_PIC = "default_profile_pic.jpg";
+const NUM_TIERS = 5;
 
 /* 
  * "Private" helper function; connects to mongo db and applys async function `callback` 
@@ -42,6 +43,8 @@ async function mongo_apply(req, res, cl, callback) {
     }
     return result;
 }
+
+/***** ACCOUNT-RELATED FUNCTIONS *****/
 
 /* 
  * Inserts account info specified in `account_info` into the accounts collection.
@@ -108,6 +111,7 @@ exports.get_account_info = async function(req, res, username) {
  * in usernames 
  */
 exports.update_account_info = async function(req, res, username, account_info) {
+    /* Wrap username and account info in associative array so number of parameters match what `mongo_apply` expects */
     var cl = {
         username: username,
         account_info: account_info
@@ -150,5 +154,59 @@ exports.remove_account_info = async function(req, res, username) {
         var accounts = dbo.collection(ACCOUNTS_COLL);
 
         await accounts.deleteMany({username: username});
+    });
+}
+
+
+/***** ADVERTISEMENT-RELATED FUNCTIONS *****/
+
+/* 
+ * Inserts advertisement info specified in `ad_info` into the advertisements collection.
+ * Returns whether or not this succeeded; should never fail in its current state 
+ */
+exports.insert_ad_info = async function(req, res, ad_info) {
+    return await mongo_apply(req, res, ad_info, async function(req, res, client, ad_info) {
+        var dbo = client.db(DB_NAME);
+        var ads = dbo.collection(ADS_COLL);
+
+        /* Parse user-inputted exercises */
+        var exercises = ad_info.exercises.split(",");
+        var exercises_trimmed = exercises.map((exercise) => exercise.trim()); /* remove leading and trailing whitespace */
+
+        /* Insert info to database */
+        await ads.insertOne({
+            business_info : {
+                name : ad_info.name,
+                website : ad_info.website,
+                address : {
+                    line1 : ad_info.addr1,
+                    line2 : ad_info.addr2,
+                    city : ad_info.city,
+                    state : ad_info.state,
+                    zip : ad_info.zip
+                }
+            },
+            pay_tier : parseInt(ad_info.pay_tier),
+            exercises : exercises_trimmed,
+            description : ad_info.description
+        });
+
+        return true;
+    });
+}
+
+/* 
+ * Retrieves advertisement info from the advertisements collection.
+ * Set `tier` to a number between 1 and 5 to get advertisement info for a specific tier.
+ * Set `tier` to null to get advertisement info for all tiers
+ */
+exports.get_ads_by_tier = async function(req, res, tier) {
+    return await mongo_apply(req, res, tier, async function(req, res, client, tier) {
+        var dbo = client.db(DB_NAME);
+        var ads = dbo.collection(ADS_COLL);
+
+        /* Look up advertisement info from collection */
+        var query = (tier == null) ? {} : {pay_tier : tier};
+        return await ads.find(query).toArray(); 
     });
 }
