@@ -4,16 +4,16 @@
   "description": "To match people who want to work out together ",
   "main": "app.js",
   "scripts": {
-       "start": "node app.js"
+    "start": "node app.js"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/radang2014/cs120-final"
+    "type": "git",
+    "url": "https://github.com/radang2014/cs120-final"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-      "url": ""
+    "url": ""
   },
   "dependencies": {
     "mongodb": "^6.5.0",
