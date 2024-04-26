@@ -5,6 +5,9 @@
 /* Stores current account user is logged in to */
 var logged_in_username = null;
 
+/* Miscellaneous variables */
+const DEFAULT_PROFILE_PIC = "default_profile_pic.jpg"
+
 /* Process submitted form data involving account creation */
 exports.process_create = async function(req, res) {
     var url = require('url');
@@ -75,7 +78,8 @@ exports.show_profile = async function(req, res) {
     res.write("<div>First Name: " + account_info.firstname + "</div>");
     res.write("<div>Last Name: " + account_info.lastname + "</div>");
     res.write("<div>Zip Code: " + account_info.zip_code + "</div>");
-    res.write("<div>Profile Picture: " + "placeholder for now" + "</div>");
+    res.write("<div>Profile Picture: </div>");
+    res.write("<img src=\"/profile_pic\" width=\"100\" height=\"100\" /> <br />");
 
     res.write("<input type=\"button\" value=\"Update Profile\" onclick=\"window.location.assign('/update_profile')\" />");
     res.write("<input type=\"button\" value=\"Change Profile Picture\" onclick=\"window.location.assign('/update_profile_picture')\" />");
@@ -92,6 +96,22 @@ exports.show_profile = async function(req, res) {
               "        window.location.assign('/profile');" + 
               "    }" + 
               "}</script>");
+}
+
+/* Show Profile Picture */
+exports.show_profile_pic = async function(req, res) {
+    var common = require('./common_module.js');
+    var mongo_query = require('./mongo_query.js');
+
+    /* Just show default picture if not logged in */
+    if (logged_in_username == null) {
+        common.dump_img(req, res, "uploads/" + DEFAULT_PROFILE_PIC);
+    } else {
+        var account_info = await mongo_query.get_account_info(req, res, logged_in_username);
+
+        /* Write profile picture */
+        common.dump_img(req, res, "uploads/" + account_info.icon_filename);
+    }
 }
 
 /* Processes request to update an existing profile */
@@ -122,6 +142,40 @@ exports.process_update_profile = async function(req, res) {
     common.send_redirect(req, res, "/profile");
 }
 
+/* Process request to update profile picture */
+exports.process_update_profile_picture = async function(req, res) {
+    var multer = require('multer');
+    var path = require('path');
+    var common = require('./common_module.js');
+    var mongo_query = require('./mongo_query.js');
+
+    /* Get username of the user currently logged in */
+    var logged_in_info = await mongo_query.get_account_info(req, res, logged_in_username);
+    var username = logged_in_info.username;
+
+    /* Grab uploaded image */
+    const storage = multer.diskStorage({
+        destination: function (req, file, callback) {
+            callback(null, 'uploads/');
+        },
+        filename: function (req, file, callback) {
+            /* Set filename to {username}_icon.{ext} */
+            callback(null, username + "_icon" + path.extname(file.originalname));
+        }
+    });
+    const upload = multer({ storage: storage }).single('profile_pic');
+    upload(req, res, function (err) {
+        if (err) {
+            console.log("Failed to upload image: error: " + err);
+        }
+    });
+
+    await mongo_query.update_account_info(req, res, logged_in_username, {
+        icon_filename : username + "_icon.jpg"
+    })
+    common.send_redirect(req, res, "/profile");
+}
+
 /* Processes request to delete an account */
 exports.process_delete = async function(req, res) {
     var mongo_query = require('./mongo_query.js');
@@ -136,28 +190,3 @@ exports.process_delete = async function(req, res) {
 
     await exports.process_logout(req, res);
 }
-
-
-/* Grab uploaded image */
-
-/* Note to self: form tag needs to have: enctype="multipart/form-data" */
-// var multer = require('multer');
-// var path = require('path');
-// 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, callback) {
-//         callback(null, 'uploads/');
-//     },
-//     filename: function (req, file, callback) {
-//         /* Set filename to {username}_icon.{ext} */
-//         callback(null, username + "_icon" + path.extname(file.originalname));
-//     }
-// });
-// const upload = multer({ storage: storage }).single('icon');
-// upload(req, res, function (err) {
-//     if (err) {
-//         console.log("Failed to upload image: error: " + err);
-//     } else {
-//         console.log("Uploaded file successfully???");
-//     }
-// });

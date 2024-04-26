@@ -52,6 +52,11 @@ http.createServer(async function(req, res) {
     if (urlObj.pathname == "/profile") {
         await accounts.show_profile(req, res);
     }
+    if (urlObj.pathname == "/profile_pic") {
+        res.writeHead(200, {'Content-Type': 'image/jpg'});
+        await accounts.show_profile_pic(req, res);
+        return; /* early return to avoid res.end() */
+    }
     if (urlObj.pathname == "/update_profile") {
         /* If not logged in, redirect to login */
         if (accounts.get_logged_in_username() == null) {
@@ -64,8 +69,10 @@ http.createServer(async function(req, res) {
         await accounts.process_update_profile(req, res);
     }
     if (urlObj.pathname == "/update_profile_picture") {
-        common.send_alert(req, res, "Not yet implemented.");
-        common.send_redirect(req, res, "/profile");
+        await common.dump_file(req, res, "pages/accounts/update_profile_pic.html");
+    }
+    if (urlObj.pathname == "/process_update_profile_picture") {
+        await accounts.process_update_profile_picture(req, res);
     }
 
     /* Delete Account */

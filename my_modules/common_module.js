@@ -14,10 +14,22 @@ exports.dump_file = async function (req, res, path) {
     res.write(txt);
 };
 
-/* Return contents of file `path`, binary */
-exports.get_file_contents = async function(path) {
+/* 
+ * Dump image with contents of `path` in response `res` 
+ * IMPORTANT: Make sure the correct image header has already been written to `res`.
+ */
+exports.dump_img = async function(req, res, path) {
     var fs = require('fs');
-    var txt = await fs.promises.readFile(path, "binary");
+
+    fs.readFile(path, function(err, img) {
+        res.end(img);
+    });
+}
+
+/* Return contents of file `path`, reading using mode `mode` */
+exports.get_file_contents = async function(path, mode) {
+    var fs = require('fs');
+    var txt = await fs.promises.readFile(path, mode);
     return txt;
 }
 

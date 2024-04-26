@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercise Matching App</title>
+        <meta http-equiv="description" content="HTML Template" />
+        <meta http-equiv="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Import Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+
+        <!-- CSS -->
+        <style type="text/css"></style>
+    </head>
+    <body>
+        <h1>Exercise Matching App</h1>
+
+        <p>Leave blank any fields you do not wish to update.</p>
+        
+        <form name="update_profile_pic" method="post" action="process_update_profile_picture" onsubmit="return validate()" enctype="multipart/form-data">
+            <div>Upload Profile Picture:</div>
+            <input type="file" name="profile_pic" /> <br />
+
+            <input type="submit" value="Update Profile Picture" />
+        </form>
+
+        <a href="/profile">Return to Profile</a>
+
+        <script>
+            /* Form validation function */ 
+            function validate() {
+                var form = document.forms["update_profile_pic"];
+
+                /* Ensure file is not empty */ 
+                if (form["profile_pic"].value == "") {
+                    alert("ERROR: You did not upload your profile picture.");
+                    return false;
+                }
+
+                /* Ensure file is a JPG file */ 
+                if (!form["profile_pic"].value.endsWith(".jpg")) {
+                    alert("ERROR: Image needs to be a jpg image.");
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+    </body>
+</html>

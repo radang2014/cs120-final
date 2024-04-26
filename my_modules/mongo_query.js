@@ -8,13 +8,16 @@ const MongoClient = mongo.MongoClient;
 const conn_str = "mongodb+srv://dbuser123:dbuser123@finalcluster.6etqbbi.mongodb.net/?retryWrites=true&w=majority&appName=finalcluster";
 
 /* Variables related to mongodb configuration */
-DB_NAME = "final";
-EVENTS_COLL = "Events";
-ACCOUNTS_COLL = "accounts";
-ADS_COLL = "advertisements";
-EVENT_RATINGS_COLL = "event_rating";
-LOCATIONS_COLL = "location";
-LOCATION_RATINGS_COLL = "location_rating";
+const DB_NAME = "final";
+const EVENTS_COLL = "Events";
+const ACCOUNTS_COLL = "accounts";
+const ADS_COLL = "advertisements";
+const EVENT_RATINGS_COLL = "event_rating";
+const LOCATIONS_COLL = "location";
+const LOCATION_RATINGS_COLL = "location_rating";
+
+/* Miscellaneous variables */
+const DEFAULT_PROFILE_PIC = "default_profile_pic.jpg"
 
 /* 
  * "Private" helper function; connects to mongo db and applys async function `callback` 
@@ -62,7 +65,8 @@ exports.insert_account_info = async function(req, res, account_info) {
             password: account_info.password,
             zip_code: account_info.zip,
             firstname: account_info.firstname,
-            lastname: account_info.lastname
+            lastname: account_info.lastname,
+            icon_filename: DEFAULT_PROFILE_PIC 
         });
 
         return true;
