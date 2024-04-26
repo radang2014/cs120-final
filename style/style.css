@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  ul.nav_bar{             
+    margin: 0;
+    padding: 0;
+    width: 100%;        
+    height: 65px;
+    background-color: #2b7271;
+    color: #f0f0f0;
+    text-align: center ;
+    font-size: 24px;
+    line-height: 2.5;
+    list-style-type: none;
+  }
+
+  li {
+    padding-left: 20px;
+    padding-right: 20px; 
+    min-width: 30px;
+  } 
+
+  #eventTitle, #eventText, #attendees, #exerciseElements, #map {
+    /* height:100px; */
+    width: 30%;
+    background-color: #838394;
+    color: black;
+    border: 1px solid black;
+    margin:20px;
+  }
+
+  .attendee {
+    width:200px;
+    height:75px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+    margin:20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 75px;
+    /* padding-left:50px; */
+  }
+
+  .icon {
+    height:50px;
+    width:50px;
+    float:left;
+    margin-left: 15px;
+    margin-top:12.5px;
+    border: 1px solid black;
+  }
+
+  #eventTitle {
+    text-transform: capitalize;
+  }
+
+  #map {
+    height:450px;
+    
+  }
+
+  #mapPic {    
+    margin: 0 auto;
+    height:400px;
+    width:400px;
+    background-image: url('streetview.jpg');    
+  }

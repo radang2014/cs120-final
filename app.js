@@ -3,6 +3,7 @@ var port = process.env.PORT || 8080;
 
 var fs = require('fs');
 var url = require('url')
+const path = require('path');
 
 /* Import common module -- for organization */
 var common = require('./my_modules/common_module.js');
@@ -10,6 +11,7 @@ var common = require('./my_modules/common_module.js');
 /* Import modules containing page-specific functionality */
 var accounts = require('./my_modules/accounts.js');
 var ads = require('./my_modules/advertisements.js');
+var events = require('./my_modules/events.js')
 
 http.createServer(async function(req, res) {
     var urlObj = url.parse(req.url, true);
@@ -60,6 +62,12 @@ http.createServer(async function(req, res) {
         await accounts.show_profile_pic(req, res);
         return; /* early return to avoid res.end() */
     }
+    if (urlObj.pathname == "/maps_pic") {
+        res.writeHead(200, {'Content-Type': 'image/jpg'});
+        await events.show_maps_image(req, res);
+        return; /* early return to avoid rs.end() */
+    }
+
     if (urlObj.pathname == "/update_profile") {
         /* If not logged in, redirect to login */
         if (accounts.get_logged_in_username() == null) {
@@ -96,6 +104,15 @@ http.createServer(async function(req, res) {
     /* View Advertisements by Tier -- this "view" was built for testing purposes only */
     if (urlObj.pathname == "/view_ads") {
         await ads.show_ads_by_tier(req, res);
+    }
+
+    /* Event Page */
+    if (urlObj.pathname == "/event") {
+        await events.serve_events_content(req, res);
+    }
+
+    if (urlObj.pathname === '/style/style.css') {
+        await common.dump_file(req, res, "style/style.css");        
     }
 
     res.end();

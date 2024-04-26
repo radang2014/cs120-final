@@ -210,3 +210,37 @@ exports.get_ads_by_tier = async function(req, res, tier) {
         return await ads.find(query).toArray(); 
     });
 }
+
+
+/***** EVENT-RELATED FUNCTIONS *****/
+
+exports.get_event_info = async function (query) {
+    const client = new MongoClient(conn_str);
+    try {
+        const pipeline = [
+            { $match: query },
+            {
+                $lookup: {
+                  'from': 'accounts', 
+                  'localField': 'users', 
+                  'foreignField': 'username', 
+                  'as': 'attendees'
+                }
+              }, {
+                $lookup: {
+                  'from': 'location', 
+                  'localField': 'location', 
+                  'foreignField': '_id', 
+                  'as': 'loc'
+                }
+              }
+          ];
+        
+        const coll = client.db('final').collection('Events');
+        const cursor = coll.aggregate(pipeline);
+        const qdata = await cursor.toArray();
+        return qdata[0];
+    } finally {
+        await client.close()
+    }      
+}
