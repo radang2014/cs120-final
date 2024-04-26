@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercise Matching App</title>
+        <meta http-equiv="description" content="HTML Template" />
+        <meta http-equiv="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Import Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+
+        <!-- CSS -->
+        <style type="text/css"></style>
+    </head>
+    <body>
+        <h1>Exercise Matching App</h1>
+        
+        <form name="create_account" method="get" action="process_create_account" onsubmit="return validate()">
+            <div>
+                First Name: <input type="text" name="firstname" />
+            </div>
+
+            <div>
+                Last Name: <input type="text" name="lastname" />
+            </div>
+
+            <div>
+                Username: <input type="text" name="username" />
+            </div>
+
+            <div>
+                Password: <input type="text" name="password" />
+            </div>
+
+            <div>
+                Zip: <input type="text" name="zip" />
+            </div>
+
+            <input type="submit" value="Create Account" />
+        </form>
+
+        <a href="/">Return to Home</a>
+
+        <script>
+            /* Form validation function */ 
+            function validate() {
+                var form = document.forms["create_account"];
+
+                /* Ensure first name is filled */ 
+                if (form["firstname"].value.trim() == "") {
+                    alert("ERROR: First Name cannot be empty");
+                    return false;
+                }
+
+                /* Ensure last name is filled */ 
+                if (form["lastname"].value.trim() == "") {
+                    alert("ERROR: Last Name cannot be empty");
+                    return false;
+                }
+
+                /* Ensure username has right format */
+                if (form["username"].value.trim() == "") {
+                    alert("ERROR: Username cannot be empty");
+                    return false;
+                }
+                if (!(/^[a-z0-9_.]+$/.test(form["username"].value))) {
+                    alert("ERROR: Username can only be composed of lowercase letters, numbers " + 
+                          ", underscore characters, and periods.");
+                    return false;
+                }
+
+                /* Ensure password is not empty */ 
+                if (form["password"].value.trim() == "") {
+                    alert("ERROR: Password cannot be empty");
+                    return false;
+                }
+
+                /* Ensure zip code is not empty */ 
+                if (form["zip"].value.trim() == "") {
+                    alert("ERROR: Zip code cannot be empty");
+                    return false;
+                }
+                /* Ensure zip code is properly formatted */ 
+                if (!is_zipcode(form["zip"].value)) {
+                    alert("ERROR: Zip code must be composed of exactly five digits");
+                    return false;
+                }
+            }
+
+            function is_digit(c) {
+                return c >= '0' && c <= '9';
+            }
+
+            function is_zipcode(zip) {
+                if (zip.length != 5) {
+                    return false;
+                }
+                for (var i = 0; i < 5; i++) {
+                    if (!is_digit(zip.charAt(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        </script>
+    </body>
+</html>
