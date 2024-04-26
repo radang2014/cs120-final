@@ -7,7 +7,7 @@
     const fs = require('fs');
     try {
         console.log(lat, long)
-        let key = 'AIzaSyAOcT6TJEWVMe0CggeH8oMRnBdI-PvPJgk'
+        let key = ''
         var req = `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${lat},${long}&key=${key}`
         const response = await axios.get(req, { responseType: 'stream' });
     
