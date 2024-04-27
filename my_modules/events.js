@@ -70,16 +70,17 @@ exports.serve_events_content = async function(req, res) {
                         )
         console.log(qdata.attendees)
         stn = `Who's Coming`;
-        qdata.attendees.forEach(function(user) {
+        qdata.attendees.forEach(function(user) {            
             let fname = user.firstname;
-            let icon = user.icon_filename;       
+            let icon = user.icon_filename;     
             stn += `<div class="attendee"><div class="icon">
-                    <img src="/uploads/${icon}" width="50px" height="50px" alt="Image">
+                    <img src="uploads/${icon}" width="50px" height="50px" alt="Image">
                     </div>${fname}</div>`
+            console.log(stn)
         })                
         $('#attendees').html(stn)
         return qdata
-    })    
+    })  
     .then(qdata=>{        
         download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)
         return
@@ -92,6 +93,5 @@ exports.serve_events_content = async function(req, res) {
 
 exports.show_maps_image = async function(req, res) {
     var common = require('./common_module.js');
-    var fs = require('fs');
     common.dump_img(req, res, "uploads/streetview.jpg");
 }

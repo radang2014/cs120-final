@@ -68,6 +68,14 @@ http.createServer(async function(req, res) {
         return; /* early return to avoid rs.end() */
     }
 
+    if (/.(jpg)$/.test(urlObj.pathname)) {
+        res.writeHead(200, {'Content-Type': 'image/jpg'});
+        let imgname = urlObj.pathname
+        await common.dump_img(req, res, imgname.substring(1, imgname.length));
+        return;
+    //   })
+    }
+
     if (urlObj.pathname == "/update_profile") {
         /* If not logged in, redirect to login */
         if (accounts.get_logged_in_username() == null) {
