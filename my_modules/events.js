@@ -7,7 +7,7 @@
     const fs = require('fs');
     try {
         console.log(lat, long)
-        let key = ''
+        let key = 'AIzaSyDSAkrdsg6U-l9ihF7eocHImiBji7fNLNY'
         var req = `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${lat},${long}&key=${key}`
         const response = await axios.get(req, { responseType: 'stream' });
     
@@ -81,7 +81,7 @@ exports.serve_events_content = async function(req, res) {
         return qdata
     })    
     .then(qdata=>{        
-        // download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)
+        download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)
         return
     })
     .then( _ =>        {
