@@ -32,13 +32,32 @@ body {
     min-width: 30px;
   } 
 
-  #eventTitle, #eventText, #attendees, #exerciseElements, #map {
+  #eventTitle, #eventText{
     /* height:100px; */
+    font-family: Arial, Helvetica, sans-serif;
     width: 30%;
+    /* background-color: #838394; */
+    color: black;
+    border: 3px solid rgb(7, 136, 82);
+    margin: 20px auto;
+    padding: 2px;
+    text-align: center;    
+    border-radius: 20pt;
+  }
+
+  #eventTitle {
+    font-size: 24;
+  }
+
+  #attendees, #exerciseElements, #map {
+    float:left;
+    /* width: 30%; */
     background-color: #838394;
     color: black;
     border: 1px solid black;
     margin:20px;
+    text-align: center;
+    border-radius: 20px;
   }
 
   .attendee {
@@ -67,13 +86,19 @@ body {
   }
 
   #map {
-    height:450px;
-    
+    padding: 25px;
   }
 
   #mapPic {    
     margin: 0 auto;
     height:400px;
     width:400px;
-    background-image: url('streetview.jpg');    
+    background-image: url('streetview.jpg');        
+    
+  }
+
+  #locText {
+    padding: 5px;
+    text-align: left;
+    font-weight: 700;
   }

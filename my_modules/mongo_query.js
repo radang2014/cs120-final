@@ -226,7 +226,15 @@ exports.get_event_info = async function (query) {
                   'foreignField': 'username', 
                   'as': 'attendees'
                 }
-              }, {
+              }, 
+              {
+                $lookup: {
+                  'from': 'accounts', 
+                  'localField': 'owner', 
+                  'foreignField': 'username', 
+                  'as': 'owner_info'
+                }
+              } , {
                 $lookup: {
                   'from': 'location', 
                   'localField': 'location', 

@@ -40,23 +40,34 @@ exports.serve_events_content = async function(req, res) {
     const url = require('url')
 
     var urlObj = url.parse(req.url, true);  
-    
     if (urlObj.query.event == undefined) {
-        res.write('404 Not Found');
-        return
+        res.write('<html><body>404 Not Found</body></html>');
+        return;
     }
-    var eventId = urlObj.query.event
-
+    // console.log(urlObj.query.username)    
     var txt = await fs.promises.readFile('pages/event.html', "utf8")
-    const $ = cheerio.load(txt);  
+    var $ = cheerio.load(txt);  
 
+    var eventId = urlObj.query.event
+    if (eventId.length < 12) {
+        res.write('<html><body>404 Not Found</body></html>');
+        return;
+    }
     var sampleEventId = new mongoose.Types.ObjectId(eventId);
     var query = {_id:sampleEventId}
-
+    
     await mongo_query.get_event_info(query).then(async function(qdata){
-        $('#eventTitle').text(`${qdata.owner}'s ${qdata.tag[0]} Event`)
+        if (qdata == undefined) {
+            $ = cheerio.load( '<html><body>404 Not Found</body></html>')
+            return undefined;
+        }
+        $('#eventTitle').text(`${qdata.owner_info[0].firstname}'s ${qdata.tag[0]} Event`)
         $('#eventText').text(qdata.description)
-        $('#locText').text('')
+        $('#locText').html(`${qdata.loc[0].name}<br>
+                            ${qdata.loc[0].address.line1}<br>
+                            ${qdata.loc[0].address.line2}<br>
+                            ${qdata.loc[0].address.city}, ${qdata.loc[0].address.state} ${qdata.loc[0].address.zip}                            `
+                        )
         console.log(qdata.attendees)
         stn = `Who's Coming`;
         qdata.attendees.forEach(function(user) {
@@ -70,7 +81,7 @@ exports.serve_events_content = async function(req, res) {
         return qdata
     })    
     .then(qdata=>{        
-        download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)
+        // download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)
         return
     })
     .then( _ =>        {
