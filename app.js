@@ -12,6 +12,7 @@ var common = require('./my_modules/common_module.js');
 var accounts = require('./my_modules/accounts.js');
 var ads = require('./my_modules/advertisements.js');
 var events = require('./my_modules/events.js')
+var new_event = require('./my_modules/new_event.js')
 
 http.createServer(async function(req, res) {
     var urlObj = url.parse(req.url, true);
@@ -119,9 +120,28 @@ http.createServer(async function(req, res) {
         await events.serve_events_content(req, res);
     }
 
+    if (urlObj.pathname == "/process_join_event") {
+        await events.process_join_event(req, res);
+    }
+
+    if (urlObj.pathname == "/new_event") {
+        await new_event.serve_new_event_content(req, res);
+    }
+
+    if (urlObj.pathname == "/process_create_event") {
+        await new_event.process_create_event(req, res);
+    }
+
+
+
+
+    /* Style Sheet */
+
     if (urlObj.pathname === '/style/style.css') {
         await common.dump_file(req, res, "style/style.css");        
     }
+
+    
 
     res.end();
 }).listen(port);

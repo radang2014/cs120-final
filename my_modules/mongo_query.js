@@ -252,3 +252,80 @@ exports.get_event_info = async function (query) {
         await client.close()
     }      
 }
+
+exports.insert_location = async function(loc_info) {
+    return await mongo_apply(req, res, loc_info, async function(req, res, client, loc_info) {
+        var dbo = client.db(DB_NAME);
+        var accounts = dbo.collection(LOCATIONS_COLL);
+
+        /* Insert info to database */
+        await accounts.insertOne({
+            name: loc_info.name,
+            address: {
+                line1: loc_info.line1,
+                line2: loc_info.line2,
+                city: loc_info.city,
+                state: loc_info.state,
+                zip: loc_info.zip,
+            },
+            latitude: loc_info.lat,
+            longitude: loc_info.long,
+        });
+
+        return true;
+    });
+}
+
+exports.insert_new_event = async function (event_info) {
+    const client = new MongoClient(conn_str);
+
+    return await mongo_apply(req, res, event_info, async function(req, res, client, event_info) {
+        var dbo = client.db(DB_NAME);
+        var accounts = dbo.collection(EVENTS_COLL);
+
+        /* Insert info to database */
+        await accounts.insertOne({
+            location: event_info.location,
+            tag: event_info.tags,
+            max: event_info.max,
+            event_date: event_info.event_date,
+            description: event_info.description,
+            users: [],
+            owner: event_info.owner
+        });
+
+        return true;
+    });
+
+}
+
+exports.add_user_to_event = async function (req, res, q_info) {
+    const client = new MongoClient(conn_str);
+    const mongoose = require('mongoose');    
+
+    return await mongo_apply(req, res, q_info, async function(req, res, client, q_info) {
+        var dbo = client.db(DB_NAME);
+        var events = dbo.collection(EVENTS_COLL);
+        var username = q_info.username; 
+        var event_id = new mongoose.Types.ObjectId(q_info.event_id);
+
+        /* don't do anything if user isn't logged in */
+        if (username === null) {
+            console.log('not logged in')
+            return false;
+        }
+
+        /* Look to see if there is a user is already attending event */
+        var find_res = await events.find({_id: event_id, users: username}).toArray();
+        if (find_res.length > 0) {
+            return false;
+        }
+
+        try {
+            await events.updateOne({_id: event_id}, {$push: {'users': username}});
+            return true;
+        } catch (err){
+            return false;
+        }
+    });
+}
