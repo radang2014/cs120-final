@@ -1,0 +1,73 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise Matching App</title>
+  <link rel="stylesheet" href="/style/style.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANyn8_H3J81QDHaEmE7DfhyhXZWLol1xU&libraries=places"></script>
+
+  <style>
+    #map {
+        height: 300px;
+        width: 40%;
+        margin-bottom: 10px;
+      }      
+  </style>
+</head>
+<body>
+    <ul class="nav_bar">
+        <li style="float:left;">Exercise Matching App</li>
+        <a href="/login"><li style="float:right;">Login</li></a>
+    </ul>
+
+    <form name="create_event" method="get" action="process_create_event">
+        
+        <div>
+            Event Description: <input type="text" name="description" />
+        </div>
+
+        <div>
+          Start Time: <input type="datetime-local" id="event_date" name="event_date" />
+        </div>
+
+        <div>
+          Max Attendees: <input type="text" name="max" />
+        </div>
+
+
+        <!-- Add Tags -->
+        <!-- Add Location -->
+        <!-- Add Exercises -->
+        <!-- <div>
+            Last Name: <input type="text" name="lastname" />
+        </div> -->
+        <label><b>Location:</b></label>
+        <div>
+          Name <input type="text" name="loc_name" />
+        </div>
+        <div>
+          Address 1: <input type="text" name="line1" />
+        </div>
+
+        <div>
+          Address 2: <input type="text" name="line2" />
+        </div>
+
+        <div>
+          City: <input type="text" name="city" />
+        </div>
+
+        <div>
+          State: <input type="text" name="state" />
+        </div>
+
+        <div>
+          Zip: <input type="text" name="zip" />
+        </div>
+
+        <input type="submit" value="Create New Event" />
+    </form>
+        
+     
+
+</body></html>

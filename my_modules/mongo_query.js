@@ -253,14 +253,19 @@ exports.get_event_info = async function (query) {
     }      
 }
 
-exports.insert_location = async function(loc_info) {
+exports.insert_location = async function(req, res, loc_info) {
     return await mongo_apply(req, res, loc_info, async function(req, res, client, loc_info) {
         var dbo = client.db(DB_NAME);
-        var accounts = dbo.collection(LOCATIONS_COLL);
+        var locations = dbo.collection(LOCATIONS_COLL);
 
-        /* Insert info to database */
-        await accounts.insertOne({
-            name: loc_info.name,
+        var find_res = await locations.find({latitude: loc_info.latitude, longitude: loc_info.longitude}).toArray();
+        if (find_res.length > 0) {
+            return true, find_res[0]._id;
+        }
+
+        /* Insert info to database */        
+        await locations.insertOne({
+            name: loc_info.loc_name,
             address: {
                 line1: loc_info.line1,
                 line2: loc_info.line2,
@@ -268,33 +273,63 @@ exports.insert_location = async function(loc_info) {
                 state: loc_info.state,
                 zip: loc_info.zip,
             },
-            latitude: loc_info.lat,
-            longitude: loc_info.long,
-        });
-
-        return true;
+            latitude: loc_info.latitude,
+            longitude: loc_info.longitude,
+        })
+        .then(async n =>{
+            console.log('new entry')
+            try {
+                find_res = await locations.find({
+                    latitude: loc_info.latitude, 
+                    longitude: loc_info.longitude
+                }).toArray();
+                console.log(find_res)
+                return true, find_res[0]._id;
+            } catch (err) {
+                return false, null
+            }
+        })
     });
 }
 
-exports.insert_new_event = async function (event_info) {
+exports.insert_new_event = async function (req, res, event_info) {
+    
     const client = new MongoClient(conn_str);
-
+    const mongoose = require('mongoose');    
+    
     return await mongo_apply(req, res, event_info, async function(req, res, client, event_info) {
         var dbo = client.db(DB_NAME);
-        var accounts = dbo.collection(EVENTS_COLL);
+        var events = dbo.collection(EVENTS_COLL);
+
+        var loc_id = new mongoose.Types.ObjectId(event_info.loc_id);
 
         /* Insert info to database */
-        await accounts.insertOne({
-            location: event_info.location,
+        return await events.insertOne({
+            location: loc_id,
             tag: event_info.tags,
             max: event_info.max,
             event_date: event_info.event_date,
             description: event_info.description,
-            users: [],
+            users: [event_info.owner],
             owner: event_info.owner
-        });
+        }).then(async n =>{
+            try {
+                return await events.find({
+                    location: loc_id,
+                    event_date: event_info.event_date,
+                    owner: event_info.owner
+                }).toArray();                
+            } catch (err) {
+                console.log('Error retriving new event!')
+                return false
+            }
+        })
+        .then(new_event => {
+            let event_string = new_event[0]._id.toString()
+            return event_string
+        })
 
-        return true;
+
     });
 
 }

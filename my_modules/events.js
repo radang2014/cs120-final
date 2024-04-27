@@ -100,7 +100,6 @@ exports.show_maps_image = async function(req, res) {
 }
 
 exports.process_join_event = async function(req, res) {
-    console.log('process_join_event')
     var url = require('url');
     var common = require('./common_module.js');
     var mongo_query = require('./mongo_query.js');
