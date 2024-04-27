@@ -38,7 +38,7 @@ body {
     width: 30%;
     /* background-color: #838394; */
     color: black;
-    border: 3px solid rgb(7, 136, 82);
+    border: 3px solid #2b7271;
     margin: 20px auto;
     padding: 2px;
     text-align: center;    
@@ -92,9 +92,7 @@ body {
   #mapPic {    
     margin: 0 auto;
     height:400px;
-    width:400px;
-    background-image: url('streetview.jpg');        
-    
+    width:400px;    
   }
 
   #locText {
