@@ -3,8 +3,8 @@
  */
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
-
 const MAP_KEY = process.env.MAP_KEY;
+
 var accounts = require('./accounts.js');
 
 download_map_image = async function(lat, long) {

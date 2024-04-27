@@ -16,7 +16,7 @@ var new_event = require('./my_modules/new_event.js')
 
 http.createServer(async function(req, res) {
     var urlObj = url.parse(req.url, true);
-
+    
     /* App homepage */
     if (urlObj.pathname == "/") {
         await common.dump_file(req, res, "pages/index.html");
