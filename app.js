@@ -16,7 +16,7 @@ var new_event = require('./my_modules/new_event.js')
 
 http.createServer(async function(req, res) {
     var urlObj = url.parse(req.url, true);
-    
+
     /* App homepage */
     if (urlObj.pathname == "/") {
         await common.dump_file(req, res, "pages/index.html");
@@ -132,8 +132,9 @@ http.createServer(async function(req, res) {
         await new_event.process_create_event(req, res);
     }
 
-
-
+    if (urlObj.pathname == "/update_activity_suggestions") {
+        await new_event.update_activity_suggestions(req, res);
+    }
 
     /* Style Sheet */
 

@@ -312,7 +312,8 @@ exports.insert_new_event = async function (req, res, event_info) {
             event_date: event_info.event_date,
             description: event_info.description,
             users: [event_info.owner],
-            owner: event_info.owner
+            owner: event_info.owner,
+            exercises: event_info.exercises
         }).then(async n =>{
             try {
                 return await events.find({

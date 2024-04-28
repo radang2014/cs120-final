@@ -4,15 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exercise Matching App</title>
   <link rel="stylesheet" href="/style/style.css">
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANyn8_H3J81QDHaEmE7DfhyhXZWLol1xU&libraries=places"></script>
-
-  <style>
-    #map {
-        height: 300px;
-        width: 40%;
-        margin-bottom: 10px;
-      }      
-  </style>
+  <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
+	crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <body>
     <ul class="nav_bar">
@@ -20,8 +15,15 @@
         <a href="/login"><li style="float:right;">Login</li></a>
     </ul>
 
-    <form name="create_event" method="get" action="process_create_event">
-        
+    <!-- <iframe src="https://storage.googleapis.com/maps-solutions-ldoqbugx13/address-selection/gm2i/address-selection.html"
+      width="100%" height="100%"
+      style="border:1;"
+      loading="lazy">
+  </iframe> -->
+
+    <form name="create_event" method="get" action="process_create_event">        
+
+      <div id="meta_form_section">
         <div>
             Event Description: <input type="text" name="description" />
         </div>
@@ -34,16 +36,20 @@
           Max Attendees: <input type="text" name="max" />
         </div>
 
+        <div style="visibility:hidden;">
+          <input type="text" name="exercise_list" id="form_exercise_list"/>
+        </div>
 
-        <!-- Add Tags -->
-        <!-- Add Location -->
-        <!-- Add Exercises -->
-        <!-- <div>
-            Last Name: <input type="text" name="lastname" />
-        </div> -->
+        <div style="visibility:hidden;">
+          <input type="text" name="tags" id="tags"/>
+        </div>
+
+      </div>
+
+      <div id="loc_form_section">
         <label><b>Location:</b></label>
         <div>
-          Name <input type="text" name="loc_name" />
+          Location Name <input type="text" name="loc_name" />
         </div>
         <div>
           Address 1: <input type="text" name="line1" />
@@ -64,10 +70,98 @@
         <div>
           Zip: <input type="text" name="zip" />
         </div>
+    </div>
+    <input type="submit" value="Create New Event" />
+  </form>
 
-        <input type="submit" value="Create New Event" />
-    </form>
+  <div id="activies">
+    Activites in event:
+  </div>
+
+  <div id="exercise_list">
+    <div>
+      <form id="tag_search_form">
+        Activity Type: <input id="searchTag" type="text" name="tag" />
+        <input type="submit" value="->" />
+      </form>
+      
+      <div id="activity_suggestions">
+        Activity Suggestions
+        &nbsp;
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var exercise_list = [];
+    var tags = [];
+
+    $('#tag_search_form').submit(function(evt) {
+      evt.preventDefault();
+      const form = evt.target;
+      var type = form.elements['searchTag'].value
+
+      var NINJA_KEY = 'qeNhjH2hMUdhL/j5q7VefQ==Gli1rR8gy8d0xXxZ';
+      var apiUrl = `https://api.api-ninjas.com/v1/exercises?type=${type}&X-Api-Key=${NINJA_KEY}`
+      fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        activities = 'Suggested Activites';
+        data.forEach(function(exercise) {
+          let name = exercise.name
+          let type = exercise.type
+          let level = exercise.difficulty
+          activities += `<div class='activitySuggestion' id='${name}' tagtype='${type}'>${name}<br>Type: ${type}<br>Difficulty: ${level}</div>`
+        })
+        $('#activity_suggestions').html(activities)
+        $( ".activitySuggestion" ).on( "click", function() {
+          $(this).attr("class", "activityEntered")
+          exercise_list.push($(this));          
+          $(this).fadeOut(100);
+          updateExerciseList()
+        } );
+       
+      
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      })
+    })
+
+    updateExerciseList = function() {
+      let exercise_names = []
+      let tags = []
+      activities = 'Activities in Event:<br>'
+      exercise_list.forEach(function(exercise){          
+        var tagtype = exercise.attr('tagtype')
+        activities += `<div class='activityEntered' id='${exercise[0].id}' tagtype='${tagtype}'>${exercise[0].innerHTML}</div>`
         
-     
+        exercise_names.push(exercise[0].id)
+        if (!tags.includes(tagtype)){
+          tags.push(tagtype)
+        }
+        
+      })
+      $('#activies').html(activities)
 
-</body></html>
+      $( ".activityEntered" ).on( "click", function() {
+        //var drop_ind = exercise_list.find(x => x.id === $(this).id)
+        console.log($(this)[0].id)
+        
+
+        exercise_list = exercise_list.filter(item => item[0].id !== $(this)[0].id)
+        console.log(exercise_list)
+
+        $(this).fadeOut(100);
+        updateExerciseList()
+      } );
+
+      $('#form_exercise_list').val(exercise_names.toString())
+      $('#tags').val(tags.toString())
+    }
+
+  </script>
+
+</body>
+</html>

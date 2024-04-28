@@ -23,8 +23,7 @@ exports.process_create_event = async function(req, res) {
     var urlObj = url.parse(req.url, true);
     var query = urlObj.query; 
     
-    var current_user = accounts.get_logged_in_username()
-    
+    var current_user = accounts.get_logged_in_username()    
 
     // if current_user none, don't allow event to be created
     if (current_user === null) {
@@ -34,8 +33,9 @@ exports.process_create_event = async function(req, res) {
     }
     
     query['owner'] = current_user
-    query.tags = [];
-
+    query.tags = query.tags.split(",");
+    query.exercises = query.exercise_list.split(",")
+    
     // Get lat / long from address
     let address_str = `${query.line1} ${query.line2}, ${query.city},${query.state}`
     let apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${address_str}&key=${MAP_KEY}`

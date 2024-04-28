@@ -49,7 +49,7 @@ body {
     font-size: 24;
   }
 
-  #attendees, #exerciseElements, #map {
+  #attendees, #exerciseList, #map {
     float:left;
     /* width: 30%; */
     background-color: #838394;
@@ -101,4 +101,42 @@ body {
     font-weight: 700;
   }
 
-  
+  #meta_form_section, #loc_form_section {
+
+    height:300px;
+    /* width:275px; */
+    background-color: #3788ca;
+    float:left;
+    margin:25px;
+    border-radius: 20px;
+    padding:10px;
+  }
+
+  #exercise_list {
+    width:500px;
+    background-color: #9ca6ad;
+    float:left;
+    margin:25px;
+    border-radius: 20px;
+    padding:10px;
+    float:left;
+  }
+
+#activies, #activity_suggestions {
+  width: 300px;  
+  background-color: #a4c4df;
+  margin:15px;
+  padding:5px;
+  border-radius: 20px;
+  float:left;
+}
+
+
+.activitySuggestion, .activityEntered {
+  border: 1px solid #000000;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #8bbfe2;
+  padding:10px;
+  text-transform: capitalize;
+}

@@ -4,8 +4,10 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 const MAP_KEY = process.env.MAP_KEY;
+const NINJA_KEY = process.env.NINJA_KEY;
 
 var accounts = require('./accounts.js');
+const { exitCode } = require('process');
 
 download_map_image = async function(lat, long) {
     const axios = require('axios');
@@ -35,12 +37,25 @@ download_map_image = async function(lat, long) {
     }
  }
 
+ get_exercise_info = async function(name) {
+    console.log('Exercise api call for '+name)
+    const axios = require('axios');
+    var apiUrl = `https://api.api-ninjas.com/v1/exercises?name=${name}&X-Api-Key=${NINJA_KEY}`
+
+    return await axios.get(apiUrl)
+    .then(response => {
+        console.log('API Response:', response.data);
+        return response.data
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        return null
+    });
+ }
+
 exports.serve_events_content = async function(req, res) {
 
-    console.log(accounts.get_logged_in_username())
-
     var mongo_query = require('./mongo_query.js');
-
     const fs = require('fs');
     const cheerio = require('cheerio');
     const mongoose = require('mongoose');    
@@ -86,12 +101,38 @@ exports.serve_events_content = async function(req, res) {
         return qdata
     })  
     .then(async qdata=>{        
-        await download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)
-        return
+        // await download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)
+        return qdata
+    })
+    .then(async qdata=>{
+        let exercises = qdata.exercises
+        var events = await fetchExercise(exercises)
+        return events
+    })
+    .then(events => {
+        console.log('EVENTS '+events)
+        var exercise_elements = `Exercises:<br>`
+        events.forEach(function(exercise) {
+            console.log(exercise)
+            let exname = exercise.name
+            let type = exercise.type
+            let level = exercise.difficulty
+            exercise_elements += `<div class='activitySuggestion' id=${exname}>${exname}<br>Type: ${type}<br>Difficulty: ${level}</div>`
+        })
+      $('#exerciseList').html(exercise_elements)
     })
     .then( _ =>        {
         res.write($.html())
     })
+}
+
+async function fetchExercise(exercises) {
+    var events = []
+    for (const exercise_name of exercises) {
+        const data = await get_exercise_info(exercise_name)
+        events.push(data[0])
+    }
+    return events
 }
 
 exports.show_maps_image = async function(req, res) {
@@ -108,7 +149,6 @@ exports.process_join_event = async function(req, res) {
     var query = urlObj.query; 
     var current_user = accounts.get_logged_in_username()
     query['username'] = current_user
-    console.log(query)
 
     var success = await mongo_query.add_user_to_event(req, res, query)
     if (!success) {
