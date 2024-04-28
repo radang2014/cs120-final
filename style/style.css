@@ -150,3 +150,12 @@ body {
   padding:10px;
   text-transform: capitalize;
 }
+
+.browse_event_item{
+  background-color: #6bdce0;
+  text-transform: capitalize;
+  width:300px;
+  border-radius: 20px;
+  padding:10px;
+  margin:25px;
+}

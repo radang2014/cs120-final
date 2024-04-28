@@ -44,8 +44,7 @@ exports.process_create_event = async function(req, res) {
     .then(data => {
         let loc_info = data.results[0]        
         const location = loc_info.geometry.location;        
-
-        // This sucks but I don't see a native way to get address elements
+        // [FIXME] This sucks but I don't see a native way to get address elements
         let address = loc_info.formatted_address
         let address_elements = address.split(',')
         address_elements[2].split(' ').forEach(element=>{
@@ -54,7 +53,6 @@ exports.process_create_event = async function(req, res) {
         address_elements.forEach(element=>{
             element.trim()
         })
-
         query['loc_name'] = loc_info.name
         query['line1'] = address_elements[0]
         query['city'] = address_elements[1]
@@ -62,6 +60,7 @@ exports.process_create_event = async function(req, res) {
         query['zip'] = address_elements[6]
         query['latitude'] = location.lat
         query['longitude'] = location.lng      
+        
         return query
     })
     .catch(error => {

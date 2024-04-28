@@ -97,7 +97,7 @@ exports.serve_events_content = async function(req, res) {
         return qdata
     })  
     .then(async qdata=>{        
-        await download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)
+        await download_map_image(qdata.loc[0].latitude, qdata.loc[0].longitude)        
         return qdata
     })
     .then(async qdata=>{

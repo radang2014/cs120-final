@@ -330,10 +330,7 @@ exports.insert_new_event = async function (req, res, event_info) {
             let event_string = new_event[0]._id.toString()
             return event_string
         })
-
-
     });
-
 }
 
 exports.add_user_to_event = async function (req, res, q_info) {
@@ -365,4 +362,47 @@ exports.add_user_to_event = async function (req, res, q_info) {
             return false;
         }
     });
+}
+
+exports.get_near_events = async function (req, res, zip) {
+    const client = new MongoClient(conn_str);
+
+    try {
+        const pipeline = [
+            {
+                $lookup: {
+                  'from': 'accounts', 
+                  'localField': 'users', 
+                  'foreignField': 'username', 
+                  'as': 'attendees'
+                }
+              }, 
+              {
+                $lookup: {
+                  'from': 'accounts', 
+                  'localField': 'owner', 
+                  'foreignField': 'username', 
+                  'as': 'owner_info'
+                }
+              } , {
+                $lookup: {
+                  'from': 'location', 
+                  'localField': 'location', 
+                  'foreignField': '_id', 
+                  'as': 'loc'
+                }
+              },  {
+                $match: {
+                  "loc.address.zip": zip
+                },
+              },
+          ];
+        console.log(pipeline)
+        const coll = client.db('final').collection('Events');
+        const cursor = coll.aggregate(pipeline);
+        const qdata = await cursor.toArray();
+        return qdata;
+    } finally {
+        await client.close()
+    }          
 }

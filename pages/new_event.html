@@ -139,24 +139,6 @@
         const autocompleteInput = document.getElementById('autocomplete');
         const autocomplete = new google.maps.places.Autocomplete(autocompleteInput);
         
-        // Add event listener for form submission
-        /*
-        document.getElementById('placeForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-          const place = autocomplete.getPlace();
-          if (place.geometry) {
-            const placeDetailsDiv = document.getElementById('placeDetails');
-            placeDetailsDiv.innerHTML = `
-              <p><strong>Name:</strong> ${place.name}</p>
-              <p><strong>Address:</strong> ${place.formatted_address}</p>
-              <p><strong>Coordinates:</strong> ${place.geometry.location.lat()}, ${place.geometry.location.lng()}</p>
-            `;
-          } else {
-            alert('Please select a location from the autocomplete suggestions.');
-          }
-        });
-        
-        */
 
   </script>
 
