@@ -16,8 +16,7 @@ exports.serve_events_content = async function(req, res) {
         return await mongo_query.get_near_events(req, res, user_info.zip_code)
     })
     .then(async events => {
-        var stn = ''
-        
+        var stn = ''        
         events.forEach(event =>{
             var noun = 'person'
             if (event.attendees.length > 1) {
