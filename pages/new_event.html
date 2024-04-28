@@ -24,11 +24,11 @@
         </div>
 
         <div>
-          Start Time: <input type="datetime-local" id="event_date" name="event_date" />
+          Start Time: <input required type="datetime-local" id="event_date" name="event_date" />
         </div>
 
         <div>
-          Max Attendees: <input type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
+          Max Attendees: <input required type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
         </div>
 
         <div style="visibility:hidden;">
@@ -40,7 +40,7 @@
         </div>
 
         <label><b>Location:</b></label><br>
-        <input style="width:500px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
+        <input required style="width:500px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
 
         <input type="submit" value="Create New Event" />
     </div>

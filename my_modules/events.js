@@ -13,8 +13,6 @@ download_map_image = async function(lat, long) {
     const axios = require('axios');
     const fs = require('fs');
     try {
-        console.log(lat, long)
-        
         var req = `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${lat},${long}&key=${MAP_KEY}`
         const response = await axios.get(req, { responseType: 'stream' });
     
@@ -38,13 +36,11 @@ download_map_image = async function(lat, long) {
  }
 
  get_exercise_info = async function(name) {
-    console.log('Exercise api call for '+name)
     const axios = require('axios');
     var apiUrl = `https://api.api-ninjas.com/v1/exercises?name=${name}&X-Api-Key=${NINJA_KEY}`
 
     return await axios.get(apiUrl)
     .then(response => {
-        console.log('API Response:', response.data);
         return response.data
     })
     .catch(error => {
@@ -70,6 +66,7 @@ exports.serve_events_content = async function(req, res) {
     var $ = cheerio.load(txt);  
 
     var eventId = urlObj.query.event
+    // Redirect on invalid event id
     if (eventId.length < 12) {
         res.write('<html><body>404 Not Found</body></html>');
         return;
@@ -86,10 +83,9 @@ exports.serve_events_content = async function(req, res) {
         $('#eventText').text(qdata.description)
         $('#locText').html(`${qdata.loc[0].name}<br>
                             ${qdata.loc[0].address.line1}<br>
-                            ${qdata.loc[0].address.line2}<br>
                             ${qdata.loc[0].address.city}, ${qdata.loc[0].address.state} ${qdata.loc[0].address.zip}                            `
                         )
-        stn = `Who's Coming`;
+        stn = `<b>Who's Coming</b>`;
         qdata.attendees.forEach(function(user) {            
             let fname = user.firstname;
             let icon = user.icon_filename;     
@@ -110,10 +106,8 @@ exports.serve_events_content = async function(req, res) {
         return events
     })
     .then(events => {
-        console.log('EVENTS '+events)
         var exercise_elements = `Exercises:<br>`
         events.forEach(function(exercise) {
-            console.log(exercise)
             let exname = exercise.name
             let type = exercise.type
             let level = exercise.difficulty
@@ -128,7 +122,6 @@ exports.serve_events_content = async function(req, res) {
 
 async function fetchExercise(exercises) {
     var events = []
-    console.log(exercises)
     for (const exercise_name of exercises) {
         if (exercise_name == ''){
             continue
@@ -153,6 +146,11 @@ exports.process_join_event = async function(req, res) {
     var query = urlObj.query; 
     var current_user = accounts.get_logged_in_username()
     query['username'] = current_user
+
+    if (current_user === null) {
+        common.send_redirect(req, res, `/login`);
+        return
+    }
 
     var success = await mongo_query.add_user_to_event(req, res, query)
     if (!success) {

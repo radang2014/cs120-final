@@ -121,6 +121,17 @@ body {
     padding:10px;
     float:left;
   }
+  
+
+  #join_event {
+
+    width:100px;
+    height:50px;
+    border-radius: 20px;
+    background-color: #f0a00d;
+    text-align: center;
+
+  }
 
 #activies, #activity_suggestions {
   width: 300px;  
@@ -130,7 +141,6 @@ body {
   border-radius: 20px;
   float:left;
 }
-
 
 .activitySuggestion, .activityEntered {
   border: 1px solid #000000;

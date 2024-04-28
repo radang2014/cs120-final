@@ -3,6 +3,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exercise Matching App</title>
+  <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
+	crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
@@ -25,7 +29,7 @@
 
     <form name="join_event" method="get" action="process_join_event">
         <input type="text" id="event_id" name="event_id" style="visibility:hidden;"/>
-        <input type="submit" value="Join Event" />
+        <input type="submit" id="join_event" value="Join Event" />
     </form>
 
     <script>
@@ -35,5 +39,16 @@
     </script>
 
 </body>
+
+<script>
+    $("join_event").mousedown(function(){
+        $(this).animate({'background-color': '#a77315', 'color':'#f0f0f0'})
+      });
+
+      $("join_event").mousedown(function(){
+        $(this).animate({'background-color': '#f0a00d', 'color':'#000'})
+      });
+      
+</script>
 
 </html>
