@@ -264,7 +264,7 @@ exports.insert_location = async function(req, res, loc_info) {
         }
 
         /* Insert info to database */        
-        await locations.insertOne({
+        return await locations.insertOne({
             name: loc_info.loc_name,
             address: {
                 line1: loc_info.line1,
@@ -277,17 +277,18 @@ exports.insert_location = async function(req, res, loc_info) {
             longitude: loc_info.longitude,
         })
         .then(async n =>{
-            console.log('new entry')
             try {
-                find_res = await locations.find({
+                return find_res = await locations.find({
                     latitude: loc_info.latitude, 
                     longitude: loc_info.longitude
-                }).toArray();
-                console.log(find_res)
-                return true, find_res[0]._id;
+                }).toArray();                
             } catch (err) {
-                return false, null
+                return false
             }
+        })
+        .then(new_loc => {
+            console.log(find_res)
+            return find_res[0]._id;
         })
     });
 }
