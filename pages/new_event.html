@@ -8,18 +8,13 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
 	crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANyn8_H3J81QDHaEmE7DfhyhXZWLol1xU&libraries=places"></script>
 </head>
 <body>
     <ul class="nav_bar">
         <li style="float:left;">Exercise Matching App</li>
         <a href="/login"><li style="float:right;">Login</li></a>
     </ul>
-
-    <!-- <iframe src="https://storage.googleapis.com/maps-solutions-ldoqbugx13/address-selection/gm2i/address-selection.html"
-      width="100%" height="100%"
-      style="border:1;"
-      loading="lazy">
-  </iframe> -->
 
     <form name="create_event" method="get" action="process_create_event">        
 
@@ -33,7 +28,7 @@
         </div>
 
         <div>
-          Max Attendees: <input type="text" name="max" />
+          Max Attendees: <input type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
         </div>
 
         <div style="visibility:hidden;">
@@ -44,34 +39,12 @@
           <input type="text" name="tags" id="tags"/>
         </div>
 
-      </div>
+        <label><b>Location:</b></label><br>
+        <input style="width:500px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
 
-      <div id="loc_form_section">
-        <label><b>Location:</b></label>
-        <div>
-          Location Name <input type="text" name="loc_name" />
-        </div>
-        <div>
-          Address 1: <input type="text" name="line1" />
-        </div>
-
-        <div>
-          Address 2: <input type="text" name="line2" />
-        </div>
-
-        <div>
-          City: <input type="text" name="city" />
-        </div>
-
-        <div>
-          State: <input type="text" name="state" />
-        </div>
-
-        <div>
-          Zip: <input type="text" name="zip" />
-        </div>
+        <input type="submit" value="Create New Event" />
     </div>
-    <input type="submit" value="Create New Event" />
+    
   </form>
 
   <div id="activies">
@@ -160,6 +133,30 @@
       $('#form_exercise_list').val(exercise_names.toString())
       $('#tags').val(tags.toString())
     }
+
+        // Initialize Google Places Autocomplete
+        
+        const autocompleteInput = document.getElementById('autocomplete');
+        const autocomplete = new google.maps.places.Autocomplete(autocompleteInput);
+        
+        // Add event listener for form submission
+        /*
+        document.getElementById('placeForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const place = autocomplete.getPlace();
+          if (place.geometry) {
+            const placeDetailsDiv = document.getElementById('placeDetails');
+            placeDetailsDiv.innerHTML = `
+              <p><strong>Name:</strong> ${place.name}</p>
+              <p><strong>Address:</strong> ${place.formatted_address}</p>
+              <p><strong>Coordinates:</strong> ${place.geometry.location.lat()}, ${place.geometry.location.lng()}</p>
+            `;
+          } else {
+            alert('Please select a location from the autocomplete suggestions.');
+          }
+        });
+        
+        */
 
   </script>
 

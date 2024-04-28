@@ -128,7 +128,11 @@ exports.serve_events_content = async function(req, res) {
 
 async function fetchExercise(exercises) {
     var events = []
+    console.log(exercises)
     for (const exercise_name of exercises) {
+        if (exercise_name == ''){
+            continue
+        }
         const data = await get_exercise_info(exercise_name)
         events.push(data[0])
     }
