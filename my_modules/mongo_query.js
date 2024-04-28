@@ -293,6 +293,33 @@ exports.insert_location = async function(req, res, loc_info) {
     });
 }
 
+/* 
+ * Returns database info involving the location specified by id `id`
+ * `id` can be a string or a Mongoose ObjectId type
+ * 
+ * Returns null if an entry with `id` does not exist, or if somehow 
+ * there were multiple entries with the same id. 
+ */
+exports.get_location_info = async function(req, res, id) {
+    var mongoose = require('mongoose');
+    if (typeof id === "string") {
+        id = new mongoose.Types.ObjectId(id);
+    }
+
+    return await mongo_apply(req, res, id, async function(req, res, client, id) {
+        var dbo = client.db(DB_NAME);
+        var locations = dbo.collection(LOCATIONS_COLL);
+
+        var find_res = await locations.find({_id : id}).toArray();
+
+        if (find_res.length != 1) {
+            return null;
+        }
+
+        return find_res[0];
+    });
+}
+
 exports.insert_new_event = async function (req, res, event_info) {
     
     const client = new MongoClient(conn_str);
@@ -406,4 +433,30 @@ exports.get_near_events = async function (req, res, zip) {
     } finally {
         await client.close()
     }          
+}
+
+
+/***** REVIEW-RELATED FUNCTIONS *****/
+
+/* 
+ * Insert event review with info stored in `review` into the database. 
+ */
+exports.insert_review = async function(req, res, review) {
+    return await mongo_apply(req, res, review, async function(req, res, client, review) {
+        var dbo = client.db(DB_NAME);
+        var reviews = dbo.collection(EVENT_RATINGS_COLL);
+
+        var accounts = require('./accounts.js');
+
+        var mongoose = require('mongoose');
+
+        await reviews.insertOne({
+            event_id : new mongoose.Types.ObjectId(review.event),
+            username : accounts.get_logged_in_username(),
+            rating : parseFloat(review.rating),
+            review : review.review
+        });
+
+        return true;
+    });
 }

@@ -14,6 +14,7 @@ var ads = require('./my_modules/advertisements.js');
 var events = require('./my_modules/events.js')
 var new_event = require('./my_modules/new_event.js')
 var browse_event = require('./my_modules/browse_events.js')
+var reviews = require('./my_modules/reviews.js');
 
 http.createServer(async function(req, res) {
     var urlObj = url.parse(req.url, true);
@@ -139,6 +140,15 @@ http.createServer(async function(req, res) {
 
     if (urlObj.pathname == "/update_activity_suggestions") {
         await new_event.update_activity_suggestions(req, res);
+    }
+
+    /***** REVIEW RELATED PAGES *****/
+
+    if (urlObj.pathname == "/create_review") {
+        await reviews.create_review(req, res);
+    }
+    if (urlObj.pathname == "/process_create_review") {
+        await reviews.process_create_review(req, res);
     }
 
     /* Style Sheet */

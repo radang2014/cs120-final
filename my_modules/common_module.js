@@ -15,6 +15,20 @@ exports.dump_file = async function (req, res, path) {
 };
 
 /* 
+ * Dump conents of file `path` in response `res`, but for every key 
+ * `key` in the object `vars`, replaces $`key.toUpperCase()` with 
+ * `vars[key]`.
+ */
+exports.variable_dump_file = async function(req, res, path, vars) {
+    var fs = require('fs');
+    var txt = await fs.promises.readFile(path, "utf8");
+    for (var key in vars) {
+        txt = txt.replace("$" + key.toUpperCase(), vars[key]);
+    }
+    res.write(txt);
+}
+
+/* 
  * Dump image with contents of `path` in response `res` 
  * IMPORTANT: Make sure the correct image header has already been written to `res`.
  */

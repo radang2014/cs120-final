@@ -1,0 +1,62 @@
+<!-- 
+    This page is NOT designed to be 100% static!!!
+    Tokens beginning with a "$" should be replaced with some other string, as 
+    specified in the server-side code writing this information in `reviews.js`.
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercise Matching App</title>
+        <meta http-equiv="description" content="HTML Template" />
+        <meta http-equiv="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Import Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+
+        <!-- CSS -->
+        <style type="text/css"></style>
+    </head>
+    <body>
+        <h1>Exercise Matching App</h1>
+
+        <p>
+            Submit review for $EVENT_DESCRIPTION at $LOCATION_NAME:
+        </p>
+        
+        <form name="create_review" method="get" action="process_create_review" onsubmit="return validate()">
+            <div>
+                Rating (out of 5): <input type="text" name="rating" />
+            </div>
+
+            <div>
+                Write your review here: <br />
+                <textarea name="review" cols="50" rows="7"></textarea>
+            </div>
+
+            <!-- Pass along event ID information from the previous step -->
+            <input type="hidden" name="event" value="$EVENT_ID" />
+
+            <input type="submit" value="Submit Review" />
+        </form>
+
+        <a href="/logged_in">Return to Home</a>
+
+        <script>
+            function validate() {
+                var form = document.forms["create_review"];
+
+                var valid_ratings = Array.from({ length: 41 }, (_, idx) => 1 + (idx / 10));
+
+                var rating = parseFloat(form["rating"].value);
+                if (!valid_ratings.includes(rating)) {
+                    alert("ERROR: Rating must be a multiple of 0.1 between 1.0 and 5.0.");
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+    </body>
+</html>
