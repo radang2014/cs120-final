@@ -32,7 +32,7 @@ exports.serve_events_content = async function(req, res) {
                 <p class="EventTag">${event.tag[0]} Event</p>
                 <p class="EventLocation">At ${event.loc[0].name}</p>
                 <p class="EventLocation"> ${datetime} </p>
-                <p class="EventAttendees> ${event.attendees.length} <span class="noun">${noun}</span> going</p>
+                <p class="EventAttendees"> ${event.attendees.length} <span class="noun">${noun}</span> going</p>
                 </button>`;
         })
         $('#event_container').html(stn);
