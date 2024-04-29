@@ -83,8 +83,11 @@ html {
   }
 
   #adverts {
-    width:300px;
-    justify-content: right;
+    width:90%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .activitySuggestion, .activityEntered {
@@ -96,8 +99,14 @@ html {
   }  
   
   .ad_item {
-    padding:20px;
-    border: 1px solid #f0f0f0;
+    color: white;
+    background-color: rgb(101, 103, 104);
+    width: 200px;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 25px;
   }
 
   .BackgroundImage {
@@ -122,7 +131,7 @@ html {
 
   .InfoContainer {
     display: flex;
-    background-color: #1f1f1f;
+    background-color: #363636;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -130,4 +139,37 @@ html {
     z-index: 1;
     margin: 100px 0;
     border-radius: 40px;
+    padding: 30px;
   }
+
+  .MainTitle {
+    font-size: 50px;
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gradient-text {
+    margin: 0;
+    font-size: 60px;
+    font-style: italic;
+    background: linear-gradient(to right, rgb(206, 203, 203), #df29a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .line {
+    width: 76%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 2px;
+    margin-bottom: 30px;
+}
+
+.SectionTitle {
+  margin: 0;
+  padding: 0;
+  color: white;
+  margin-top: 100px;
+}
