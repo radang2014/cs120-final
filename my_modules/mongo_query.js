@@ -425,7 +425,6 @@ exports.get_near_events = async function (req, res, zip) {
                 },
               },
           ];
-        console.log(pipeline)
         const coll = client.db('final').collection('Events');
         const cursor = coll.aggregate(pipeline);
         const qdata = await cursor.toArray();

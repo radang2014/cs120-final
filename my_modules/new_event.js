@@ -4,9 +4,28 @@ exports.serve_new_event_content = async function(req, res) {
 
     const fs = require('fs');
     const cheerio = require('cheerio');
+    const mongo_query = require('./mongo_query.js');
 
     var txt = await fs.promises.readFile('pages/new_event.html', "utf8")
     var $ = cheerio.load(txt);  
+
+    // Get Advertised Locations
+    await mongo_query.get_ads_by_tier(req, res, null)    
+    .then(all_ad_info =>{
+        var ad_html = ''
+        all_ad_info.forEach(ad_info =>{
+            let address = ad_info.business_info.address
+            ad_html += `<div class='ad_item'>
+                        ${ad_info.business_info.name} <br>                        
+                        ${address.line1}<br>
+                        ${address.city}, ${address.state} ${address.state}<br>
+                        <br>
+                        ${ad_info.description} <br>
+                        </div>`
+        })
+        $('#adverts').html(ad_html)        
+        return
+    })        
     res.write($.html())
 }
 
@@ -44,7 +63,7 @@ exports.process_create_event = async function(req, res) {
     .then(data => {
         let loc_info = data.results[0]        
         const location = loc_info.geometry.location;        
-        // [FIXME] This sucks but I don't see a native way to get address elements
+        // [FIXME] This sucks but I don't see a native way to get address elements broken up
         let address = loc_info.formatted_address
         let address_elements = address.split(',')
         address_elements[2].split(' ').forEach(element=>{

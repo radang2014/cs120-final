@@ -1,0 +1,114 @@
+html {
+    background-color: #fffddeef;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    height:100%;
+  }
+  
+  body {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; */
+    margin: 0;
+    height:100%;
+  }
+  
+  nav {
+    /* margin-top: 100 px;  */
+    /* background-color: #FFFDD0; Cream color */
+    background-color: #fffddeef;
+    width: 100%;
+    border-bottom: 2px solid #000000; /* Soft border */
+    /* border-top: 2px solid #000000; */
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  nav ul li:first-child {
+    float: left;
+  }
+  
+  nav ul li {
+    float: right;
+  }
+  
+  nav ul li a {
+    display: block;
+    padding: 20px 30px;
+    text-decoration: none;
+    color: #4D4D4D; /* Soft gray color */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition */
+  }
+  
+  nav ul li a:hover {
+    background-color: #d3d0cc; /* Lighter cream color on hover */
+    color: #333; /* Darker gray text on hover */
+  }
+  
+  #meta_form_section {
+    height:300px;
+    /* width:275px; */
+    background-color: #3788ca;
+    float:left;
+    margin:25px;
+    border-radius: 20px;
+    padding:10px;
+  }
+
+  #suggestion_wrapper {
+    width:500px;
+    background-color: #9ca6ad;
+    float:left;
+    margin:25px;
+    border-radius: 20px;
+    padding:10px;
+    float:left;
+  }
+  
+  #activies {
+    width: 300px;  
+    background-color: #a4c4df;
+    margin:25px;
+    padding:10px;
+    border-radius: 20px;
+    float:left;
+  }
+  
+  #activity_suggestions {
+    width: 300px;  
+    background-color: #a4c4df;
+    margin:15px;
+    padding:10px;
+    border-radius: 20px;
+    float:left;
+  }
+
+  #adverts {
+    width:300px;
+    float:right;
+    height:100%;
+    background-color: #838394;
+    justify-content: right;
+  }
+
+  .activitySuggestion, .activityEntered {
+    border: 1px solid #000000;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: #8bbfe2;
+    padding: 10px;
+    text-transform: capitalize;
+  }  
+  
+  .ad_item {
+    padding:20px;
+    background-color: #8bbfe2;
+    border: 1px solid #f0f0f0;
+  }

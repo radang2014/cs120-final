@@ -21,7 +21,8 @@ http.createServer(async function(req, res) {
 
     /* App homepage */
     if (urlObj.pathname == "/") {
-        await common.dump_file(req, res, "pages/index.html");
+        // await common.dump_file(req, res, "pages/index.html");
+        await common.dump_file(req, res, "pages/home.html");
     }
 
     /* App homepage but logged in */
@@ -155,6 +156,14 @@ http.createServer(async function(req, res) {
 
     if (urlObj.pathname === '/style/style.css') {
         await common.dump_file(req, res, "style/style.css");        
+    }
+
+    if (urlObj.pathname === '/style/new_event_style.css') {
+        await common.dump_file(req, res, "style/new_event_style.css");        
+    }
+
+    if (urlObj.pathname === '/style/homestyle.css') {
+        await common.dump_file(req, res, "style/homestyle.css");        
     }
 
     

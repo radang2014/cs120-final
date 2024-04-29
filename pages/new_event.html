@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exercise Matching App</title>
-  <link rel="stylesheet" href="/style/style.css">
+  <link rel="stylesheet" href="/style/new_event_style.css">
+
   <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
 	crossorigin="anonymous"></script>
@@ -12,10 +13,16 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANyn8_H3J81QDHaEmE7DfhyhXZWLol1xU&libraries=places"></script>
 </head>
 <body>
-    <ul class="nav_bar">
-        <li style="float:left;">Exercise Matching App</li>
-        <a href="/login"><li style="float:right;">Login</li></a>
-    </ul>
+      <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/new_event">Create New Events</a></li>
+            <li><a href="/browse_event">Browse Events</a></li>
+        </ul>
+    </nav>
+
 
     <form name="create_event" method="get" action="process_create_event">        
 
@@ -32,6 +39,10 @@
           Max Attendees: <input required type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
         </div>
 
+        <div>
+          Location: <input required type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
+        </div>
+
         <div style="visibility:hidden;">
           <input type="text" name="exercise_list" id="form_exercise_list"/>
         </div>
@@ -40,22 +51,54 @@
           <input type="text" name="tags" id="tags"/>
         </div>
 
-        <label><b>Location:</b></label><br>
-        <input required style="width:500px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
-
         <input type="submit" value="Create New Event" />
-    </div>
-    
-  </form>
+
+      </div>
+    </form>
 
   <div id="activies">
     Activites in event:
   </div>
 
-  <div id="exercise_list">
+  <div id="suggestion_wrapper">
     <div>
       <form id="tag_search_form">
-        Activity Type: <input id="searchTag" type="text" name="tag" />
+        Activity Type: <input id="searchTag" type="text" name="tag" list="searchTagList"/><br>
+        <datalist id="searchTagList">          
+          <option value="cardio">cardio</option>
+          <option value="olympic_weightlifting">olympic_weightlifting</option>
+          <option value="plyometrics">plyometrics</option>
+          <option value="powerlifting">powerlifting</option>
+          <option value="strength">strength</option>
+          <option value="stretching">stretching</option>
+          <option value="strongman">strongman</option>
+        </datalist>
+
+        Muscle: <input id="searchMuscle" type="text" name="muscle" list="muscleList" /><br>
+        <datalist id="muscleList">        
+          <option value="abdominals">abdominals</option>
+          <option value="abductors">abductors</option>
+          <option value="adductors">adductors</option>
+          <option value="biceps">biceps</option>
+          <option value="calves">calves</option>
+          <option value="chest">chest</option>
+          <option value="forearms">forearms</option>
+          <option value="glutes">glutes</option>
+          <option value="hamstrings">hamstrings</option>
+          <option value="lats">lats</option>
+          <option value="lower_back">lower_back</option>
+          <option value="middle_back">middle_back</option>
+          <option value="neck">neck</option>
+          <option value="quadriceps">quadriceps</option>
+          <option value="traps">traps</option>
+          <option value="triceps">triceps</option>
+        </datalist>
+        Difficulty: <input id="searchLevel" type="text" name="difficulty" list="levelList" />
+        <datalist id="levelList">        
+          <option value="beginner">beginner</option>
+          <option value="intermediate">intermediate</option>
+          <option value="expert">expert</option>
+        </datalist>
         <input type="submit" value="->" />
       </form>
       
@@ -66,6 +109,8 @@
     </div>
   </div>
 
+  <div id="adverts"></div>
+
   <script>
 
     var exercise_list = [];
@@ -75,13 +120,17 @@
       evt.preventDefault();
       const form = evt.target;
       var type = form.elements['searchTag'].value
+      var muscle = form.elements['searchMuscle'].value
+      var difficulty = form.elements['searchLevel'].value
 
       var NINJA_KEY = 'qeNhjH2hMUdhL/j5q7VefQ==Gli1rR8gy8d0xXxZ';
-      var apiUrl = `https://api.api-ninjas.com/v1/exercises?type=${type}&X-Api-Key=${NINJA_KEY}`
+      var apiUrl = `https://api.api-ninjas.com/v1/exercises?type=${type}&muscle=${muscle}&difficulty=${difficulty}&X-Api-Key=${NINJA_KEY}`
+      console.log(apiUrl)
       fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        activities = 'Suggested Activites';
+        console.log(data)
+        activities = 'Activity Suggestions';
         data.forEach(function(exercise) {
           let name = exercise.name
           let type = exercise.type
