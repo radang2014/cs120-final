@@ -47,7 +47,7 @@ exports.process_create_event = async function(req, res) {
 
     // if current_user none, don't allow event to be created
     if (current_user === null) {
-        common.send_alert(req, res, "Please log in before creating an event"); 
+        common.send_alert(req, res, "Please create an account or log in before creating an event"); 
         common.send_redirect(req, res, `/login`);
         return;
     }

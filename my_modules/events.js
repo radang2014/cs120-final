@@ -153,6 +153,7 @@ exports.process_join_event = async function(req, res) {
     query['username'] = current_user
 
     if (current_user === null) {
+        common.send_alert(req, res, "Please create an account or log in before creating any events");
         common.send_redirect(req, res, `/login`);
         return
     }
