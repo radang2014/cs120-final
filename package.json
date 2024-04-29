@@ -16,13 +16,16 @@
     "url": ""
   },
   "dependencies": {
+    "axios": "^1.6.8",
     "cheerio": "^1.0.0-rc.12",
     "dateformat": "^5.0.3",
     "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^3.3.2",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "url": "^0.11.3"
   }
 }
