@@ -5,8 +5,9 @@ exports.serve_new_event_content = async function(req, res) {
     const fs = require('fs');
     const cheerio = require('cheerio');
     const mongo_query = require('./mongo_query.js');
+    const common = require('./common_module.js');
 
-    var txt = await fs.promises.readFile('pages/new_event.html', "utf8")
+    var txt = await common.conditional_read_file('pages/new_event.html')
     var $ = cheerio.load(txt);  
 
     // Get Advertised Locations
