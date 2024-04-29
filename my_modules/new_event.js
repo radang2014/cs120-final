@@ -20,8 +20,7 @@ exports.serve_new_event_content = async function(req, res) {
                         ${ad_info.business_info.name} <br>                        
                         ${address.line1}<br>
                         ${address.city}, ${address.state} ${address.state}<br>
-                        <br>
-                        ${ad_info.description} <br>
+                        <p style="font-weight: 300; "> ${ad_info.description} </p> <br>
                         </div>`
         })
         $('#adverts').html(ad_html)        
