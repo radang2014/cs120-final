@@ -328,12 +328,12 @@ exports.insert_new_event = async function (req, res, event_info) {
         var dbo = client.db(DB_NAME);
         var events = dbo.collection(EVENTS_COLL);
 
-        var loc_id = new mongoose.Types.ObjectId(event_info.loc_id);
+
         var event_date = new Date(event_info.event_date)
 
         /* Insert info to database */
         return await events.insertOne({
-            location: loc_id,
+            location: event_info.loc_id,
             tag: event_info.tags,
             max: event_info.max,
             event_date: event_date,
@@ -350,8 +350,8 @@ exports.insert_new_event = async function (req, res, event_info) {
         .then(async n =>{
             try {
                 return await events.find({
-                    location: loc_id,
-                    event_date: event_info.event_date,
+                    location: event_info.loc_id,
+                    event_date: event_date,
                     owner: event_info.owner
                 }).toArray();                
             } catch (err) {
