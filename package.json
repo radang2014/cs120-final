@@ -4,7 +4,7 @@
   "description": "To match people who want to work out together ",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js --timeout=12000"
   },
   "repository": {
     "type": "git",
