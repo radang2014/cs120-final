@@ -6,6 +6,8 @@ dotenv.config({ path: './config.env' });
 const MAP_KEY = process.env.MAP_KEY;
 const NINJA_KEY = process.env.NINJA_KEY;
 
+const DEFAULT_PROFILE_PIC = "default_profile_pic.jpg"
+
 var accounts = require('./accounts.js');
 
 download_map_image = async function(lat, long) {
@@ -51,6 +53,7 @@ download_map_image = async function(lat, long) {
 exports.serve_events_content = async function(req, res) {
 
     var mongo_query = require('./mongo_query.js');
+    var common = require('./common_module.js');
     const fs = require('fs');
     const cheerio = require('cheerio');
     const mongoose = require('mongoose');    
@@ -61,7 +64,7 @@ exports.serve_events_content = async function(req, res) {
         res.write('<html><body>404 Not Found</body></html>');
         return;
     }
-    var txt = await fs.promises.readFile('pages/event.html', "utf8")
+    var txt = await common.conditional_read_file('pages/event.html')
     var $ = cheerio.load(txt);  
 
     var eventId = urlObj.query.event
@@ -87,7 +90,10 @@ exports.serve_events_content = async function(req, res) {
         stn = `<b>Who's Coming</b>`;
         qdata.attendees.forEach(function(user) {            
             let fname = user.firstname;
-            let icon = user.icon_filename;     
+            let icon = user.icon_filename;  
+            if (!fs.existsSync("uploads/${icon}")) {
+                icon = DEFAULT_PROFILE_PIC;
+            }
             stn += `<div class="attendee"><div class="icon">
                     <img src="uploads/${icon}" width="50px" height="50px" alt="Image">
                     </div>${fname}</div>`
@@ -147,6 +153,7 @@ exports.process_join_event = async function(req, res) {
     query['username'] = current_user
 
     if (current_user === null) {
+        common.send_alert(req, res, "Please create an account or log in before creating any events");
         common.send_redirect(req, res, `/login`);
         return
     }

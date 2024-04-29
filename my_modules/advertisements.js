@@ -25,7 +25,7 @@ exports.process_create = async function(req, res) {
     }
 
     common.send_alert(req, res, "Advertisement successfully created!");
-    common.send_redirect(req, res, "/logged_in"); /* return to home page */
+    common.send_redirect(req, res, "/"); /* return to home page */
 }
 
 /* 
