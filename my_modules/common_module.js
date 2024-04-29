@@ -23,7 +23,7 @@ exports.variable_dump_file = async function(req, res, path, vars) {
     var fs = require('fs');
     var txt = await fs.promises.readFile(path, "utf8");
     for (var key in vars) {
-        txt = txt.replace("$" + key.toUpperCase(), vars[key]);
+        txt = txt.replaceAll("$" + key.toUpperCase(), vars[key]);
     }
     res.write(txt);
 }

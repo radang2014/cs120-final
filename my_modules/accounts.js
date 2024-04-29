@@ -25,7 +25,7 @@ exports.process_create = async function(req, res) {
     }
 
     logged_in_username = query.username;
-    common.send_redirect(req, res, "/logged_in");
+    common.send_redirect(req, res, "/");
 }
 
 /* Get username of user who is currently logged in */
@@ -51,7 +51,7 @@ exports.process_login = async function(req, res) {
     }
 
     logged_in_username = query.username;
-    common.send_redirect(req, res, "/logged_in");
+    common.send_redirect(req, res, "/");
 }
 
 /* Process request to log out */
@@ -86,7 +86,7 @@ exports.show_profile = async function(req, res) {
     res.write("<input type=\"button\" value=\"Delete Account\" onclick=\"delete_account_wrapper()\" />");
 
     res.write("<br />");
-    res.write("<a href=\"/logged_in\">Back to Home</a>");
+    res.write("<a href=\"/\">Back to Home</a>");
 
     res.write("<script>function delete_account_wrapper() {" + 
               "    var sure = confirm(\"Are you sure you want to delete your account?\");" + 
