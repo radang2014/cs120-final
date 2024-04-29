@@ -159,6 +159,10 @@ http.createServer(async function(req, res) {
         await common.dump_file(req, res, "style/homestyle.css");        
     }
 
+    if (urlObj.pathname === '/style/login_style.css') {
+        await common.dump_file(req, res, "style/login_style.css");        
+    }
+
     
 
     res.end();
