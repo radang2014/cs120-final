@@ -2,7 +2,7 @@ html {
   background-color: #fffddeef;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  height:100%;
+  height: 100%;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
   align-items: center;
   text-align: center; */
   margin: 0;
-  height:100%;
+  height: 100%;
 }
 
 nav {
@@ -20,7 +20,8 @@ nav {
   /* background-color: #FFFDD0; Cream color */
   background-color: #fffddeef;
   width: 100%;
-  border-bottom: 2px solid #000000; /* Soft border */
+  border-bottom: 2px solid #000000;
+  /* Soft border */
   /* border-top: 2px solid #000000; */
 }
 
@@ -43,109 +44,135 @@ nav ul li a {
   display: block;
   padding: 20px 30px;
   text-decoration: none;
-  color: #4D4D4D; /* Soft gray color */
-  transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition */
+  color: #4D4D4D;
+  /* Soft gray color */
+  transition: background-color 0.5s ease, color 0.5s ease;
+  /* Smooth transition */
 }
 
 nav ul li a:hover {
-  background-color: #d3d0cc; /* Lighter cream color on hover */
-  color: #333; /* Darker gray text on hover */
+  background-color: #d3d0cc;
+  /* Lighter cream color on hover */
+  color: #333;
+  /* Darker gray text on hover */
 }
 
 
-  .container {
+/* .container {
     max-width: 800px;
     margin: 50px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  #eventTitle, #eventText{
-    /* height:100px; */
-    font-family: Arial, Helvetica, sans-serif;
-    width: 30%;
-    /* background-color: #838394; */
-    color: black;
-    border: 3px solid #2b7271;
-    margin: 20px auto;
-    padding: 2px;
-    text-align: center;    
-    border-radius: 20pt;
-  }
+  } */
 
-  #eventTitle {
-    font-size: 24;
-  }
+#eventTitle,
+#eventText {
+  /* height:100px; */
+  font-family: "Poppins", sans-serif;
+  width: 30%;
+  /* background-color: #838394; */
+  color: black;
+  border: 3px solid #2b7271;
+  margin: 20px auto;
+  padding: 2px;
+  text-align: center;
+  border-radius: 20pt;
+}
 
-  #attendees, #exerciseList, #map {
-    float:left;
-    /* width: 30%; */
-    background-color: #87e5de;
-    padding:10px;
-    color: black;
-    margin:20px;
-    text-align: center;
-    border-radius: 20px;
-  }
+#eventTitle {
+  font-size: 24;
+}
 
-  .attendee {
-    width:200px;
-    height:75px;
-    background-color: #d9d9d9;
-    border-radius: 20px;
-    margin:20px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 75px;
-    /* padding-left:50px; */
-  }
-
-  .icon {
-    height:50px;
-    width:50px;
-    float:left;
-    margin-left: 15px;
-    margin-top:12.5px;
-    border: 1px solid black;
-  }
-
-  #eventTitle {
-    text-transform: capitalize;
-  }
-
-  #map {
-    padding: 25px;
-  }
-
-  #mapPic {    
-    margin: 0 auto;
-    height:400px;
-    width:400px;    
-  }
-
-  #locText {
-    padding: 5px;
-    text-align: left;
-    font-weight: 700;
-  }
-
-  #join_event {
-    width:100px;
-    height:50px;
-    border-radius: 20px;
-    background-color: #f0a00d;
-    text-align: center;
-  }
-
-.browse_event_item{
-  background-color: #6bdce0;
-  text-transform: capitalize;
-  width:300px;
+#attendees,
+#exerciseList,
+#map {
+  float: left;
+  /* width: 30%; */
+  background-color: #87e5de;
+  padding: 10px;
+  color: black;
+  margin: 20px;
+  text-align: center;
   border-radius: 20px;
-  padding:10px;
-  margin:25px;
+}
+
+.attendee {
+  width: 200px;
+  height: 75px;
+  background-color: #d9d9d9;
+  border-radius: 20px;
+  margin: 20px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 75px;
+  /* padding-left:50px; */
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+  float: left;
+  margin-left: 15px;
+  margin-top: 12.5px;
+  border: 1px solid black;
+}
+
+#eventTitle {
+  text-transform: capitalize;
+}
+
+#map {
+  padding: 25px;
+}
+
+#mapPic {
+  margin: 0 auto;
+  height: 400px;
+  width: 400px;
+}
+
+#locText {
+  padding: 5px;
+  text-align: left;
+  font-weight: 700;
+}
+
+#join_event {
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #f0a00d;
+  text-align: center;
+}
+
+.MainContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+button {
+  font-family: "Poppins", sans-serif;
+}
+
+.browse_event_item {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: white;
+  background-color: rgb(32, 125, 161);
+  border: none;
+  text-transform: capitalize;
+  width: 200px;
+  height: 350px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.browse_event_item p {
+  margin: 0px;
+  padding: 0px;
 }
 
 .exerciseItem {
@@ -154,4 +181,28 @@ nav ul li a:hover {
   background-color: #8bbfe2;
   padding: 10px;
   text-transform: capitalize;
-}  
+}
+
+.event_container {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  margin: auto;
+  flex-wrap: wrap;
+  background: linear-gradient(to )
+}
+
+.Username {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: white;
+  font-size: 30px;
+}
+
+.EventTag {
+
+}
+
+.EventLocation {}
+
+.EventAttendees {}
