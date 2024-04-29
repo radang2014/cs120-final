@@ -329,18 +329,25 @@ exports.insert_new_event = async function (req, res, event_info) {
         var events = dbo.collection(EVENTS_COLL);
 
         var loc_id = new mongoose.Types.ObjectId(event_info.loc_id);
+        var event_date = new Date(event_info.event_date)
 
         /* Insert info to database */
         return await events.insertOne({
             location: loc_id,
             tag: event_info.tags,
             max: event_info.max,
-            event_date: event_info.event_date,
+            event_date: event_date,
             description: event_info.description,
             users: [event_info.owner],
             owner: event_info.owner,
             exercises: event_info.exercises
-        }).then(async n =>{
+        })
+            
+        .catch(error => {
+            console.error('Error:', error);
+            return null
+        })          
+        .then(async n =>{
             try {
                 return await events.find({
                     location: loc_id,
@@ -419,7 +426,7 @@ exports.get_near_events = async function (req, res, zip) {
               },  {
                 $match: {
                 //   "loc.address.zip": zip
-                    "event_date" : {$gt: new Date().toISOString()}
+                    "event_date" : {$gt: new Date()}
                 },
               },
           ];
