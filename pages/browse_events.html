@@ -5,7 +5,10 @@
         <meta http-equiv="description" content="HTML Template" />
         <meta http-equiv="keywords" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+        <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
+            crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <!-- Import Google Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 
@@ -29,4 +32,15 @@
 
         
     </body>
+
+    <script>
+        $('.browse_event_item')
+        .mouseover(function(){
+            $(this).stop().animate( {height: '360px', width: '260px', backgroundColor: '#2eb4ae'}, {duration:50});
+        })
+        .mouseout(function(){
+            $(this).stop().animate( {height: '350px', width: '250px', backgroundColor:'rgb(32, 125, 161)'}, {duration:50});
+          });
+    </script>
+
 </html>
