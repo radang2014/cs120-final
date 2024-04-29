@@ -1,3 +1,4 @@
+var accounts = require('./accounts.js');
 
 exports.serve_events_content = async function(req, res) {
 
@@ -9,14 +10,15 @@ exports.serve_events_content = async function(req, res) {
     var txt = await common.conditional_read_file("pages/browse_events.html");
     var $ = cheerio.load(txt);  
 
-    // var current_user = accounts.get_logged_in_username()
-    var current_user = 'abawgus'
+    var current_user = accounts.get_logged_in_username()
 
-    await mongo_query.get_account_info(req, res, current_user)
-    .then(async user_info =>{
-        return await mongo_query.get_near_events(req, res, user_info.zip_code)
-    })
-    .then(async events => {
+    // await mongo_query.get_account_info(req, res, current_user)
+    // .then(async user_info =>{
+    //     console.log(user_info)
+    //     return await mongo_query.get_near_events(req, res)
+    // })
+    await mongo_query.get_near_events(req, res)
+    .then (async events => {
         var stn = ''        
         events.forEach(event =>{            
             let optionalText = ''
