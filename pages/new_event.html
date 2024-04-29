@@ -40,7 +40,7 @@
         </div>
 
         <div>
-          Location: <input required type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
+          Location: <input required style="width:200px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
         </div>
 
         <div style="visibility:hidden;">
@@ -125,11 +125,11 @@
 
       var NINJA_KEY = 'qeNhjH2hMUdhL/j5q7VefQ==Gli1rR8gy8d0xXxZ';
       var apiUrl = `https://api.api-ninjas.com/v1/exercises?type=${type}&muscle=${muscle}&difficulty=${difficulty}&X-Api-Key=${NINJA_KEY}`
-      console.log(apiUrl)
+      
       fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        
         activities = 'Activity Suggestions';
         data.forEach(function(exercise) {
           let name = exercise.name
@@ -169,13 +169,7 @@
       $('#activies').html(activities)
 
       $( ".activityEntered" ).on( "click", function() {
-        //var drop_ind = exercise_list.find(x => x.id === $(this).id)
-        console.log($(this)[0].id)
-        
-
         exercise_list = exercise_list.filter(item => item[0].id !== $(this)[0].id)
-        console.log(exercise_list)
-
         $(this).fadeOut(100);
         updateExerciseList()
       } );

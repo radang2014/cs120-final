@@ -82,9 +82,9 @@ nav ul li a:hover {
   #attendees, #exerciseList, #map {
     float:left;
     /* width: 30%; */
-    background-color: #838394;
+    background-color: #87e5de;
+    padding:10px;
     color: black;
-    border: 1px solid black;
     margin:20px;
     text-align: center;
     border-radius: 20px;
@@ -132,24 +132,12 @@ nav ul li a:hover {
   }
 
   #join_event {
-
     width:100px;
     height:50px;
     border-radius: 20px;
     background-color: #f0a00d;
     text-align: center;
-
   }
-
-
-.activitySuggestion, .activityEntered {
-  border: 1px solid #000000;
-  margin: 5px;
-  border-radius: 10px;
-  background-color: #8bbfe2;
-  padding:10px;
-  text-transform: capitalize;
-}
 
 .browse_event_item{
   background-color: #6bdce0;
@@ -160,3 +148,10 @@ nav ul li a:hover {
   margin:25px;
 }
 
+.exerciseItem {
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #8bbfe2;
+  padding: 10px;
+  text-transform: capitalize;
+}  

@@ -287,7 +287,6 @@ exports.insert_location = async function(req, res, loc_info) {
             }
         })
         .then(new_loc => {
-            console.log(find_res)
             return find_res[0]._id;
         })
     });
@@ -393,7 +392,6 @@ exports.add_user_to_event = async function (req, res, q_info) {
 
 exports.get_near_events = async function (req, res, zip) {
     const client = new MongoClient(conn_str);
-    console.log( new Date().toISOString())
     try {
         const pipeline = [
             {

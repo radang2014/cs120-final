@@ -13,7 +13,7 @@ download_map_image = async function(lat, long) {
     const axios = require('axios');
     const fs = require('fs');
     try {
-        var req = `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${lat},${long}&key=${MAP_KEY}`
+        var req = `https://maps.googleapis.com/maps/api/streetview?size=600x600&location=${lat},${long}&key=${MAP_KEY}`
         const response = await axios.get(req, { responseType: 'stream' });
     
         // Save image to file
@@ -111,7 +111,7 @@ exports.serve_events_content = async function(req, res) {
             let exname = exercise.name
             let type = exercise.type
             let level = exercise.difficulty
-            exercise_elements += `<div class='activitySuggestion' id=${exname}>${exname}<br>Type: ${type}<br>Difficulty: ${level}</div>`
+            exercise_elements += `<div class='exerciseItem' id=${exname}>${exname}<br>Type: ${type}<br>Difficulty: ${level}</div>`
         })
       $('#exerciseList').html(exercise_elements)
     })
