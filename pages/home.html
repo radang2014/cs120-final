@@ -1,3 +1,24 @@
+<!--
+    This file should be included using: 
+
+    common.variable_dump_file(req, res, "pages/home.html", {
+        profile_link: "/create_account",
+        profile_text: "Create Account",
+        login_link: "/login",
+        login_text: "Login"
+    });
+    if currently logged out
+
+    or:
+    common.variable_dump_file(req, res, "pages/home.html", {
+        profile_link: "/create_account",
+        profile_text: "Create Account",
+        login_link: "/logout",
+        login_text: "Logout"
+    });
+    if currently logged in
+-->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,8 +35,8 @@
         <nav>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li><a href="$LOGIN_LINK">$LOGIN_TEXT</a></li>
+            <li><a href="$PROFILE_LINK">$PROFILE_TEXT</a></li>
             <li><a href="/new_event">Create New Events</a></li>
             <li><a href="/browse_event">Browse Events</a></li>
           </ul>
@@ -60,8 +81,8 @@
         <footer>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li><a href="$LOGIN_LINK">$LOGIN_TEXT</a></li>
+            <li><a href="$PROFILE_LINK">$PROFILE_TEXT</a></li>
             <li><a href="/new_event">Create New Events</a></li>
             <li><a href="/browse_event">Browse Events</a></li>
           </ul>

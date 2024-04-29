@@ -22,17 +22,33 @@ http.createServer(async function(req, res) {
     /* App homepage */
     if (urlObj.pathname == "/") {
         // await common.dump_file(req, res, "pages/index.html");
-        await common.dump_file(req, res, "pages/home.html");
+
+        /* Check if user is logged in */
+        if (accounts.get_logged_in_username() == null) {
+            await common.variable_dump_file(req, res, "pages/home.html", {
+                profile_link: "/create_account",
+                profile_text: "Create Account",
+                login_link: "/login",
+                login_text: "Login"
+            });
+        } else {
+            await common.variable_dump_file(req, res, "pages/home.html", {
+                profile_link: "/profile",
+                profile_text: "Profile",
+                login_link: "/logout",
+                login_text: "Logout"
+            });
+        }
     }
 
     /* App homepage but logged in */
-    if (urlObj.pathname == "/logged_in") {
-        if (accounts.get_logged_in_username() != null) {
-            await common.dump_file(req, res, "pages/index_logged_in.html");
-        } else {
-            common.send_redirect(req, res, "/");
-        }
-    }
+    // if (urlObj.pathname == "/logged_in") {
+    //     if (accounts.get_logged_in_username() != null) {
+    //         await common.dump_file(req, res, "pages/index_logged_in.html");
+    //     } else {
+    //         common.send_redirect(req, res, "/");
+    //     }
+    // }
 
     /***** ACCOUNT RELATED PAGES *****/
 
