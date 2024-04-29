@@ -46,23 +46,26 @@
         </p>
         <hr class="line">
 
-        <form name="create_event" method="get" action="process_create_event">        
-
+        <form class="FormStyle" name="create_event" method="get" action="process_create_event">        
           <div id="meta_form_section">
-            <div>
-                Event Description: <input type="text" name="description" />
+            <div class="InputDiv">
+                <p>Event Description: </p>
+                <input class="TextInput" type="text" name="description" />
             </div>
 
-            <div>
-              Start Time: <input required type="datetime-local" id="event_date" name="event_date" />
+            <div class="InputDiv">
+              <p>Start Time: </p>
+              <input class="TextInput" required type="datetime-local" id="event_date" name="event_date" />
             </div>
 
-            <div>
-              Max Attendees: <input required type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
+            <div class="InputDiv">
+              <p>Max Attendees: </p>
+              <input class="TextInput" required type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
             </div>
 
-            <div>
-              Location: <input required style="width:200px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
+            <div class="InputDiv">
+              <p>Location: </p>
+              <input class="TextInput" required style="width:200px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
             </div>
 
             <div style="visibility:hidden;">
@@ -73,62 +76,76 @@
               <input type="text" name="tags" id="tags"/>
             </div>
 
-            <input type="submit" value="Create New Event" />
+            <input class="InputButton" type="submit" value="Create New Event" />
 
           </div>
         </form>
 
+        <p class="SectionTitle">
+          Your activities
+        </p>
+        <hr class="line">
         <div id="activies">
-          Activites in event:
         </div>
 
+        <p class="SectionTitle">
+          Want suggestions?
+        </p>
+        <hr class="line">
         <div id="suggestion_wrapper">
-          <div>
-            <form id="tag_search_form">
-              Activity Type: <input id="searchTag" type="text" name="tag" list="searchTagList"/><br>
-              <datalist id="searchTagList">          
-                <option value="cardio">cardio</option>
-                <option value="olympic_weightlifting">olympic_weightlifting</option>
-                <option value="plyometrics">plyometrics</option>
-                <option value="powerlifting">powerlifting</option>
-                <option value="strength">strength</option>
-                <option value="stretching">stretching</option>
-                <option value="strongman">strongman</option>
-              </datalist>
+            <form class="FormStyle" id="tag_search_form">
+              <div class="InputDiv">
+                <p>Activity Type: </p>
+                <input class="TextInput" id="searchTag" type="text" name="tag" list="searchTagList"/><br>
+                <datalist id="searchTagList">          
+                  <option value="cardio">cardio</option>
+                  <option value="olympic_weightlifting">olympic_weightlifting</option>
+                  <option value="plyometrics">plyometrics</option>
+                  <option value="powerlifting">powerlifting</option>
+                  <option value="strength">strength</option>
+                  <option value="stretching">stretching</option>
+                  <option value="strongman">strongman</option>
+                </datalist>
+              </div>
 
-              Muscle: <input id="searchMuscle" type="text" name="muscle" list="muscleList" /><br>
-              <datalist id="muscleList">        
-                <option value="abdominals">abdominals</option>
-                <option value="abductors">abductors</option>
-                <option value="adductors">adductors</option>
-                <option value="biceps">biceps</option>
-                <option value="calves">calves</option>
-                <option value="chest">chest</option>
-                <option value="forearms">forearms</option>
-                <option value="glutes">glutes</option>
-                <option value="hamstrings">hamstrings</option>
-                <option value="lats">lats</option>
-                <option value="lower_back">lower_back</option>
-                <option value="middle_back">middle_back</option>
-                <option value="neck">neck</option>
-                <option value="quadriceps">quadriceps</option>
-                <option value="traps">traps</option>
-                <option value="triceps">triceps</option>
-              </datalist>
-              Difficulty: <input id="searchLevel" type="text" name="difficulty" list="levelList" />
-              <datalist id="levelList">        
-                <option value="beginner">beginner</option>
-                <option value="intermediate">intermediate</option>
-                <option value="expert">expert</option>
-              </datalist>
-              <input type="submit" value="->" />
+              <div class="InputDiv">
+                <p>Muscle: </p>
+                <input class="TextInput" id="searchMuscle" type="text" name="muscle" list="muscleList" /><br>
+                <datalist id="muscleList">        
+                  <option value="abdominals">abdominals</option>
+                  <option value="abductors">abductors</option>
+                  <option value="adductors">adductors</option>
+                  <option value="biceps">biceps</option>
+                  <option value="calves">calves</option>
+                  <option value="chest">chest</option>
+                  <option value="forearms">forearms</option>
+                  <option value="glutes">glutes</option>
+                  <option value="hamstrings">hamstrings</option>
+                  <option value="lats">lats</option>
+                  <option value="lower_back">lower_back</option>
+                  <option value="middle_back">middle_back</option>
+                  <option value="neck">neck</option>
+                  <option value="quadriceps">quadriceps</option>
+                  <option value="traps">traps</option>
+                  <option value="triceps">triceps</option>
+                </datalist>
+              </div>
+
+              <div class="InputDiv">
+                <p>Difficulty: </p>
+                <input class="TextInput" id="searchLevel" type="text" name="difficulty" list="levelList" />
+                <datalist id="levelList">        
+                  <option value="beginner">beginner</option>
+                  <option value="intermediate">intermediate</option>
+                  <option value="expert">expert</option>
+                </datalist>
+              </div>
+              <input class="InputButton" style="margin: 32px 0px;" type="submit" value="Go!"/>
             </form>
             
             <div id="activity_suggestions">
-              Activity Suggestions
               &nbsp;
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -152,7 +169,7 @@
       .then(response => response.json())
       .then(data => {
         
-        activities = 'Activity Suggestions';
+        activities = '';
         data.forEach(function(exercise) {
           let name = exercise.name
           let type = exercise.type
@@ -177,7 +194,7 @@
     updateExerciseList = function() {
       let exercise_names = []
       let tags = []
-      activities = 'Activities in Event:<br>'
+      activities = ''
       exercise_list.forEach(function(exercise){          
         var tagtype = exercise.attr('tagtype')
         activities += `<div class='activityEntered' id='${exercise[0].id}' tagtype='${tagtype}'>${exercise[0].innerHTML}</div>`
