@@ -5,8 +5,9 @@ exports.serve_new_event_content = async function(req, res) {
     const fs = require('fs');
     const cheerio = require('cheerio');
     const mongo_query = require('./mongo_query.js');
+    const common = require('./common_module.js');
 
-    var txt = await fs.promises.readFile('pages/new_event.html', "utf8")
+    var txt = await common.conditional_read_file('pages/new_event.html')
     var $ = cheerio.load(txt);  
 
     // Get Advertised Locations
@@ -45,7 +46,7 @@ exports.process_create_event = async function(req, res) {
 
     // if current_user none, don't allow event to be created
     if (current_user === null) {
-        common.send_alert(req, res, "Please log in before creating an event"); 
+        common.send_alert(req, res, "Please create an account or log in before creating an event"); 
         common.send_redirect(req, res, `/login`);
         return;
     }

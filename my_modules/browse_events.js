@@ -2,10 +2,11 @@
 exports.serve_events_content = async function(req, res) {
 
     var mongo_query = require('./mongo_query.js');
+    var common = require('./common_module.js');
     const fs = require('fs');
     const cheerio = require('cheerio');
 
-    var txt = await fs.promises.readFile('pages/browse_events.html', "utf8")
+    var txt = await common.conditional_read_file("pages/browse_events.html");
     var $ = cheerio.load(txt);  
 
     // var current_user = accounts.get_logged_in_username()

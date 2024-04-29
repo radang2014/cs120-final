@@ -198,7 +198,7 @@ exports.insert_ad_info = async function(req, res, ad_info) {
 /* 
  * Retrieves advertisement info from the advertisements collection.
  * Set `tier` to a number between 1 and 5 to get advertisement info for a specific tier.
- * Set `tier` to null to get advertisement info for all tiers
+ * Set `tier` to null to get advertisement info for all tiers, sorted from increasing to decreasing priority
  */
 exports.get_ads_by_tier = async function(req, res, tier) {
     return await mongo_apply(req, res, tier, async function(req, res, client, tier) {
@@ -207,7 +207,12 @@ exports.get_ads_by_tier = async function(req, res, tier) {
 
         /* Look up advertisement info from collection */
         var query = (tier == null) ? {} : {pay_tier : tier};
-        return await ads.find(query).toArray(); 
+        var result = await ads.find(query).toArray(); 
+
+        /* Ensure higher tiers (i.e. closest to 1) are returned first */
+        result.sort((ad1, ad2) => ad1.pay_tier - ad2.pay_tier);
+
+        return result;
     });
 }
 
