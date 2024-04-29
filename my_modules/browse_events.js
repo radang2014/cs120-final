@@ -22,8 +22,8 @@ exports.serve_events_content = async function(req, res) {
             if (event.attendees.length > 1) {
                 noun = 'people'
             }
-            let datetime = event.event_date.
-                replace(/T/, ' ').      // replace T with a space
+            let datetime = event.event_date.toISOString().
+                replace(/T/, ' ').
                 replace(/\..+/, '')
             stn += `<button class="browse_event_item" id='${event._id.toString()}'
                     onclick="location.href='./event?event=${event._id.toString()}'"

@@ -7,7 +7,6 @@ const MAP_KEY = process.env.MAP_KEY;
 const NINJA_KEY = process.env.NINJA_KEY;
 
 var accounts = require('./accounts.js');
-const { exitCode } = require('process');
 
 download_map_image = async function(lat, long) {
     const axios = require('axios');
