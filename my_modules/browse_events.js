@@ -23,7 +23,7 @@ exports.serve_events_content = async function(req, res) {
             if (event.attendees.length == 2) {                
                 optionalText = ` & 1 other`
             } else if (event.attendees.length > 2) {
-                optionalText = ` $ ${event.attendees.length-1} other`
+                optionalText = ` & ${event.attendees.length-1} other`
             }
             let datetime = event.event_date.toISOString().
                 replace(/T/, ' ').

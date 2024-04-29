@@ -85,6 +85,40 @@ nav ul li a:hover {
   font-size: 24;
 }
 
+h1 {
+font-size: 60px;
+  font-style: italic;
+  background: linear-gradient(to right, #1f1f55, #115f7e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.BackgroundImage {
+    background-image: url('../pages/images/park.png');
+    background-size: cover; 
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(10px);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+.TileContainer {
+    display: flex;
+    background-color: #dff1c6;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    z-index: 1;
+    margin: 100px 0;
+    border-radius: 40px;
+    padding: 15px;
+  }
+
 #attendees,
 #exerciseList,
 #map {
@@ -161,7 +195,9 @@ button {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   color: white;
-  background-color: rgb(32, 125, 161);
+  /* background-color: #115874; */
+  /* background: linear-gradient(to bottom, #207da1, #115874); */
+  background: linear-gradient(to bottom, #30c599, #196496);
   border: none;
   text-transform: capitalize;
   width: 250px;
@@ -187,7 +223,7 @@ button {
 .event_container {
   display: flex;
   justify-content: center;
-  width: 80%;
+  width: 90%;
   margin: auto;
   flex-wrap: wrap;
   background: linear-gradient(to )

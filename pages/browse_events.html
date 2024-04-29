@@ -26,8 +26,14 @@
             </ul>
         </nav>
 
-        <div class="MainContainer">
-            <div class="event_container" id="event_container"></div>
+        
+
+        <div class="MainContainer">       
+            <div class="BackgroundImage"></div>     
+            <div class="TileContainer">
+                <h1>Meet up at our Events</h1>
+                <div class="event_container" id="event_container"></div>
+            </div>
         </div>
 
         
@@ -36,10 +42,10 @@
     <script>
         $('.browse_event_item')
         .mouseover(function(){
-            $(this).stop().animate( {height: '360px', width: '260px', backgroundColor: '#2eb4ae', margin: '1px'}, {duration:50});
+            $(this).stop().animate( {height: '360px', width: '260px', background:'linear-gradient(to bottom, #30c599, #196496)', margin: '1px'}, {duration:50});
         })
         .mouseout(function(){
-            $(this).stop().animate( {height: '350px', width: '250px', backgroundColor:'rgb(32, 125, 161)', margin: '10px'}, {duration:50});
+            $(this).stop().animate( {height: '350px', width: '250px', background:'linear-gradient(to bottom, #207da1, #115874)', margin: '10px'}, {duration:50});
           });
     </script>
 
