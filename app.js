@@ -152,6 +152,10 @@ http.createServer(async function(req, res) {
         await reviews.process_create_review(req, res);
     }
 
+    if (urlObj.pathname == "/show_rating") {
+        await reviews.show_rating(req, res);
+    }
+
     /* Style Sheet */
 
     if (urlObj.pathname === '/style/style.css') {

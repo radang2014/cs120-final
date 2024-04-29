@@ -459,3 +459,53 @@ exports.insert_review = async function(req, res, review) {
         return true;
     });
 }
+
+/* 
+ * Grab all of the reviews with location ID `location_id`
+ */
+exports.get_reviews_by_location = async function(req, res, location_id) {
+    return await mongo_apply(req, res, location_id, async function(req, res, client, location_id) {
+        if (typeof location_id === "string") {
+            /* convert to mongoose object */
+            var mongoose = require('mongoose');
+            location_id = new mongoose.Types.ObjectId(location_id);
+        }
+
+        var dbo = client.db(DB_NAME);
+        var reviews = dbo.collection(EVENT_RATINGS_COLL);
+        var events = dbo.collection(EVENTS_COLL);
+
+        var events_at_location = await events.find({location: location_id}).toArray();
+
+        var result = [];
+        for (var event of events_at_location) {
+            var reviews_of_event = await reviews.find({event_id : event._id}).toArray();
+            result = result.concat(reviews_of_event);
+        }
+
+        return result;
+    });
+}
+
+/* 
+ * Compute the average rating of all reviews pertaining to location ID `location_id`, or 
+ * null if no such reviews exist
+ */
+exports.get_rating_by_location = async function(req, res, location_id) {
+    var reviews_by_location = await exports.get_reviews_by_location(req, res, location_id);
+
+    var ratings = reviews_by_location.map((review) => review.rating);
+
+    /* If location has not been reviewed, return null */
+    if (ratings.length == 0) {
+        return null;
+    }
+
+    /* Compute average rating */
+    var sum = 0;
+    for (rating of ratings) {
+        sum += rating;
+    }
+    return sum / ratings.length;
+}
+

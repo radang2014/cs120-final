@@ -72,3 +72,13 @@ exports.process_create_review = async function(req, res) {
     common.send_redirect(req, res, "/profile");
 }
 
+/* Show average rating by location. This function is for testing. */
+exports.show_rating = async function(req, res) {
+    var mongo_query = require('./mongo_query.js');
+    var url = require('url');
+    
+    var urlObj = url.parse(req.url, true);
+    
+    res.write("<p>" + await mongo_query.get_rating_by_location(req, res, urlObj.query.location) + "</p>");
+}
+
