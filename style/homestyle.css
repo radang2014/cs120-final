@@ -69,7 +69,7 @@ nav ul li a:hover {
 }
 
 .banner img {
-    max-width: 25%; /* Set maximum width for each image */
+    max-width: 33.33%; /* Set maximum width for each image */
     min-height: 250px; /* Set minimum height for each image */
 }
 
@@ -130,12 +130,7 @@ nav ul li a:hover {
 .TextBox {
     padding: 15px;
     width: 33%;
-    height: 500px;
     border-radius: 15px;
-}
-
-.TextBox p {
-
 }
 
 footer {
@@ -170,4 +165,48 @@ footer ul li a {
 
 footer ul li a:hover {
     text-decoration: underline; /* Underline links on hover */
+}
+
+@media screen and (max-width: 1000px) {
+    .banner img {
+        max-width: 50%;
+    }
+
+    .banner img:nth-child(3) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .AboutText {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
+    .TextBox {
+        width: 90%;
+    }
+
+    footer {
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .MainTitle p {
+        font-size: 40px;
+    }
+
+    .gradient-text {
+        font-size: 50px;
+    }
+
+    .banner img {
+        max-width: 100%;
+    }
+
+    .banner img:nth-child(2) {
+        display: none;
+    }
 }
