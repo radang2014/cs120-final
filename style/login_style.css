@@ -57,6 +57,59 @@ body {
     border: none;
 }
 
-.LoginButton:hover, .CreateAccountButton:hover {
+.LoginButton:hover {
     background-color: rgb(214, 214, 214);
 }
+
+.smallText {
+    font-size: 15px;
+}
+
+table {
+    border-spacing: 5px;
+}
+
+div.ProfileCell {
+    display: inline-block;
+    padding: 10px;
+    vertical-align: top;
+}
+
+nav {
+    /* margin-top: 100 px;  */
+    /* background-color: #FFFDD0; Cream color */
+    background-color: #fffddeef;
+    width: 100%;
+    border-bottom: 2px solid #000000; /* Soft border */
+    /* border-top: 2px solid #000000; */
+    font-weight: 700;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  nav ul li:first-child {
+    float: left;
+  }
+  
+  nav ul li {
+    float: right;
+  }
+  
+  nav ul li a {
+    display: block;
+    padding: 20px 30px;
+    text-decoration: none;
+    color: #4D4D4D; /* Soft gray color */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition */
+  }
+  
+  nav ul li a:hover {
+    background-color: #d3d0cc; /* Lighter cream color on hover */
+    color: #333; /* Darker gray text on hover */
+  }
+>>>>>>> Stashed changes

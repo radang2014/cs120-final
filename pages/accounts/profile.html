@@ -1,0 +1,113 @@
+<!--
+    For this to actually display profile information, use await common.variable_dump_file(),
+    passing in the necessary variables for username, first name, etc.
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../style/login_style.css" >
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/new_event">Create New Events</a></li>
+                <li><a href="/browse_event">Browse Events</a></li>
+            </ul>
+        </nav>
+
+        <div class="MainContainer">
+            <div class="LoginContainer">
+                <div class="Image">
+
+                </div>
+                <div class="SignIn">
+                    <p>
+                        Your Profile
+                    </p>
+                    
+                    <div>
+                        <div class="ProfileCell">
+                            <table class="smallText">
+                                <tr>
+                                    <td>Username:</td>
+                                    <td>$USERNAME</td>
+                                </tr>
+                                <tr>
+                                    <td>First Name:</td>
+                                    <td>$FIRST_NAME</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name:</td>
+                                    <td>$LAST_NAME</td>
+                                </tr>
+                                <tr>
+                                    <td>Zip Code:</td>
+                                    <td>$ZIP_CODE</td>
+                                </tr>
+                                <tr>
+                                    <td>Profile Picture:</td>
+                                    <td><img src="/profile_pic" width="100" height="100" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="ProfileCell">
+                            <button class="LoginButton" style="width:200px;" onclick="edit_profile()">
+                                Edit Profile
+                            </button> <br />
+
+                            <button class="LoginButton" style="width:200px;" onclick="update_profile_picture()">
+                                Change Profile Picture
+                            </button> <br />
+
+                            <button class="LoginButton" style="width:200px;color:red;" onclick="delete_account_wrapper()">
+                                Delete Account
+                            </button>
+                        </div>
+                    </div>
+                </div>         
+            </div>
+        </div>
+
+        <!-- 
+        <h1>Exercise Matching App</h1>
+
+        <div>Username: $USERNAME</div>
+        <div>First Name: $FIRST_NAME</div>
+        <div>Last Name: $LAST_NAME</div>
+        <div>Zip Code: $ZIP_CODE</div>
+        <div>Profile Picture: </div>
+        <img src="/profile_pic" width="100" height="100" /> <br />
+
+        <input type="button" value="Update Profile" onclick="window.location.assign('/update_profile')" />
+        <input type="button" value="Change Profile Picture" onclick="window.location.assign('/update_profile_picture')" />
+        <input type="button" value="Delete Account" onclick="delete_account_wrapper()" />
+
+        <br />
+        <a href="/">Back to Home</a>
+        -->
+
+        <script>
+            function edit_profile() {
+                window.location.assign("/update_profile");
+            }
+            function update_profile_picture() {
+                window.location.assign("/update_profile_picture");
+            }
+            function delete_account_wrapper() {
+                var sure = confirm("Are you sure you want to delete your account?");
+                if (sure) {
+                    window.location.assign("/delete_account");
+                } else {
+                    window.location.assign("/profile");
+                }
+            }
+        </script>
+    </body>
+</html>

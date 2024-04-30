@@ -73,29 +73,12 @@ exports.show_profile = async function(req, res) {
         return;
     }
 
-    res.write("<h1>Exercise Matching App</h1>");
-    res.write("<div>Username: " + account_info.username + "</div>");
-    res.write("<div>First Name: " + account_info.firstname + "</div>");
-    res.write("<div>Last Name: " + account_info.lastname + "</div>");
-    res.write("<div>Zip Code: " + account_info.zip_code + "</div>");
-    res.write("<div>Profile Picture: </div>");
-    res.write("<img src=\"/profile_pic\" width=\"100\" height=\"100\" /> <br />");
-
-    res.write("<input type=\"button\" value=\"Update Profile\" onclick=\"window.location.assign('/update_profile')\" />");
-    res.write("<input type=\"button\" value=\"Change Profile Picture\" onclick=\"window.location.assign('/update_profile_picture')\" />");
-    res.write("<input type=\"button\" value=\"Delete Account\" onclick=\"delete_account_wrapper()\" />");
-
-    res.write("<br />");
-    res.write("<a href=\"/\">Back to Home</a>");
-
-    res.write("<script>function delete_account_wrapper() {" + 
-              "    var sure = confirm(\"Are you sure you want to delete your account?\");" + 
-              "    if (sure) {" + 
-              "        window.location.assign('/delete_account');" + 
-              "    } else {" + 
-              "        window.location.assign('/profile');" + 
-              "    }" + 
-              "}</script>");
+    await common.variable_dump_file(req, res, "pages/accounts/profile.html", {
+        username: account_info.username,
+        first_name: account_info.firstname,
+        last_name: account_info.lastname,
+        zip_code: account_info.zip_code
+    });
 }
 
 /* Show Profile Picture */
