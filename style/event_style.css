@@ -73,6 +73,7 @@ nav ul li a:hover {
     /* flex-direction: column;
     justify-content: center;
     align-items: center; */
+    height:900px;
     width: 80%;
     z-index: 1;
     margin: 100px 0;
@@ -246,9 +247,11 @@ button {
 .exerciseItem {
   margin: 5px;
   border-radius: 10px;
-  background-color: #8bbfe2;
+  background-color: #381b26;
+  color: #f8f8f8;
   padding: 10px;
   text-transform: capitalize;
+  font-weight:300;
 }
 
 .event_container {

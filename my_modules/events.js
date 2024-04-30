@@ -85,7 +85,8 @@ exports.serve_events_content = async function(req, res) {
         $('#eventTime').text(`at ${qdata.event_date.toISOString().replace(/T/, ' ').
         replace(/\..+/, '')}`)
         $('#eventText').text(`"${qdata.description}"`)
-        $('#locText').html(`${qdata.loc[0].address.line1}<br>
+        $('#locText').html(`
+                            ${qdata.loc[0].address.line1}<br>
                             ${qdata.loc[0].address.city}, ${qdata.loc[0].address.state} ${qdata.loc[0].address.zip}                            `
                         )
         stn = `<p class="SectionTitle">
@@ -115,7 +116,10 @@ exports.serve_events_content = async function(req, res) {
         return events
     })
     .then(events => {
-        var exercise_elements = `Exercises:<br>`
+        var exercise_elements = `<p class="SectionTitle">
+        Exercises
+        </p>
+        <hr class="line">`;
         events.forEach(function(exercise) {
             let exname = exercise.name
             let type = exercise.type
