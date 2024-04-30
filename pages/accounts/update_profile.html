@@ -1,47 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Exercise Matching App</title>
-        <meta http-equiv="description" content="HTML Template" />
-        <meta http-equiv="keywords" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <!-- Import Google Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
-
-        <!-- CSS -->
-        <style type="text/css"></style>
+        <link rel="stylesheet" href="../style/login_style.css" >
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>Exercise Matching App</h1>
+        <div class="MainContainer" style="height:150vh;">
+            <div class="LoginContainer">
+                <div class="Image">
 
-        <p>Leave blank any fields you do not wish to update.</p>
-        
-        <form name="update_profile" method="get" action="process_update_profile" onsubmit="return validate()">
-            <div>
-                First Name: <input type="text" name="firstname" />
+                </div>
+                <div class="SignIn">
+                    <form name="update_profile" method="get" action="process_update_profile" onsubmit="return validate()">
+                        <p>
+                            Update Profile
+                        </p>
+
+                        <div style="font-size:15px;">Please leave blank any fields you do not wish to update.</div>
+                        <input class="TextInput" id="FirstName" type="text" placeholder="First Name..." name="firstname">
+                        <input class="TextInput" id="LastName" type="text" placeholder="Last Name..." name="lastname">
+                        <input class="TextInput" id="User" type="text" placeholder="Username..." name="username">
+                        <input class="TextInput" id="Pass" type="text" placeholder="Password..." name="password">
+                        <input class="TextInput" id="Zip" type="text" placeholder="Zip Code..." name="zip">
+
+                        <button class="LoginButton" type="submit" style="width:150px;">
+                            Update Info
+                        </button>
+                    </form>
+                </div>         
             </div>
-
-            <div>
-                Last Name: <input type="text" name="lastname" />
-            </div>
-
-            <div>
-                Username: <input type="text" name="username" />
-            </div>
-
-            <div>
-                Password: <input type="text" name="password" />
-            </div>
-
-            <div>
-                Zip: <input type="text" name="zip" />
-            </div>
-
-            <input type="submit" value="Update Info" />
-        </form>
-
-        <a href="/profile">Return to Profile</a>
+        </div>
 
         <script>
             /* Form validation function */ 

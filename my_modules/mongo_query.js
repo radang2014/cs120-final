@@ -402,7 +402,7 @@ exports.add_user_to_event = async function (req, res, q_info) {
     });
 }
 
-exports.get_near_events = async function (req, res, zip) {
+exports.get_near_events = async function (req, res) {
     const client = new MongoClient(conn_str);
     try {
         const pipeline = [

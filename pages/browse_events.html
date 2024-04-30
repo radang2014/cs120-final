@@ -5,12 +5,15 @@
         <meta http-equiv="description" content="HTML Template" />
         <meta http-equiv="keywords" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+        <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
+            crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <!-- Import Google Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="/style/style.css">
+        <link rel="stylesheet" href="/style/browse_event_style.css">
     </head>
     <body>
         <nav>
@@ -23,10 +26,27 @@
             </ul>
         </nav>
 
-        <div class="MainContainer">
-            <div class="event_container" id="event_container"></div>
+        
+
+        <div class="MainContainer">       
+            <div class="BackgroundImage"></div>     
+            <div class="TileContainer">
+                <h1>Meet up at our Events</h1>
+                <div class="event_container" id="event_container"></div>
+            </div>
         </div>
 
         
     </body>
+
+    <script>
+        $('.browse_event_item')
+        .mouseover(function(){
+            $(this).stop().animate( {height: '360px', width: '260px', background:'linear-gradient(to bottom, #30c599, #196496)', margin: '1px'}, {duration:50});
+        })
+        .mouseout(function(){
+            $(this).stop().animate( {height: '350px', width: '250px', background:'linear-gradient(to bottom, #207da1, #115874)', margin: '10px'}, {duration:50});
+          });
+    </script>
+
 </html>

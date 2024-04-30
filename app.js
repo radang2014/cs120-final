@@ -68,6 +68,12 @@ http.createServer(async function(req, res) {
         await common.dump_img(req, res, imgname.substring(1, imgname.length));
         return;
     }
+    if (/.(png)$/.test(urlObj.pathname)) {
+        res.writeHead(200, {'Content-Type': 'image/png'});
+        let imgname = urlObj.pathname
+        await common.dump_img(req, res, imgname.substring(1, imgname.length));
+        return;
+    }
 
     if (urlObj.pathname == "/update_profile") {
         /* If not logged in, redirect to login */
@@ -157,6 +163,14 @@ http.createServer(async function(req, res) {
 
     if (urlObj.pathname === '/style/homestyle.css') {
         await common.dump_file(req, res, "style/homestyle.css");        
+    }
+
+    if (urlObj.pathname === '/style/browse_event_style.css') {
+        await common.dump_file(req, res, "style/browse_event_style.css");        
+    }
+
+    if (urlObj.pathname === '/style/login_style.css') {
+        await common.dump_file(req, res, "style/login_style.css");        
     }
 
     
