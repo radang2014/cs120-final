@@ -69,7 +69,7 @@ exports.process_create_review = async function(req, res) {
     }
 
     common.send_alert(req, res, "Your review has been recorded. Thanks for your feedback!");
-    common.send_redirect(req, res, "/profile");
+    common.send_redirect(req, res, "/");
 }
 
 /* Show average rating by location. This function is for testing. */

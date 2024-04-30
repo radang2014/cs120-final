@@ -16,9 +16,39 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 
         <!-- CSS -->
-        <style type="text/css"></style>
+        <link rel="stylesheet" href="../style/login_style.css" >
     </head>
     <body>
+        <div class="MainContainer">
+            <div class="LoginContainer">
+                <div class="Image">
+
+                </div>
+                <div class="SignIn">
+                    <form name="create_review" method="get" action="process_create_review" onsubmit="return validate()">
+                        <p>
+                            Submit Review
+                        </p>
+                        <p class="smallText">
+                            Review for $EVENT_DESCRIPTION at $LOCATION_NAME:
+                        </p>
+
+                        <input class="TextInput" id="Rating" type="text" placeholder="Rating (out of 5.0)..." name="rating">
+
+                        <textarea class="ParagraphInput" id="Review" placeholder="Write Your Review Here!" name="review"></textarea>
+
+                        <!-- Pass along event ID information from the previous step -->
+                        <input type="hidden" name="event" value="$EVENT_ID" />
+
+                        <button class="LoginButton" type="submit" style="width:150px;">
+                            Submit Review
+                        </button>
+                    </form>
+                </div>               
+            </div>
+        </div>
+
+        <!--
         <h1>Exercise Matching App</h1>
 
         <p>
@@ -35,13 +65,14 @@
                 <textarea name="review" cols="50" rows="7"></textarea>
             </div>
 
-            <!-- Pass along event ID information from the previous step -->
+            Pass along event ID information from the previous step
             <input type="hidden" name="event" value="$EVENT_ID" />
 
             <input type="submit" value="Submit Review" />
         </form>
 
         <a href="/">Return to Home</a>
+        -->
 
         <script>
             function validate() {
