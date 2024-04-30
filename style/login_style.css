@@ -70,7 +70,6 @@ body {
 
 .LoginButton:hover {
     background-color: rgb(214, 214, 214);
-}
 
 .smallText {
     font-size: 15px;
@@ -123,3 +122,4 @@ nav {
     background-color: #d3d0cc; /* Lighter cream color on hover */
     color: #333; /* Darker gray text on hover */
   }
+

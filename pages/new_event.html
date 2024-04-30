@@ -40,112 +40,110 @@
         <hr class="line">
 
         <div id="adverts"></div>
-
         <p class="SectionTitle">
           About your Event
         </p>
         <hr class="line">
+        <div class="FormContainer">
+          <form class="FormStyle" name="create_event" method="get" action="process_create_event">        
+            <div id="meta_form_section">
+              <div class="InputDiv">
+                  <p>Event Description: </p>
+                  <input class="TextInput" type="text" name="description" />
+              </div>
 
-        <form class="FormStyle" name="create_event" method="get" action="process_create_event">        
-          <div id="meta_form_section">
-            <div class="InputDiv">
-                <p>Event Description: </p>
-                <input class="TextInput" type="text" name="description" />
+              <div class="InputDiv">
+                <p>Start Time: </p>
+                <input class="TextInput" required type="datetime-local" id="event_date" name="event_date" />
+              </div>
+
+              <div class="InputDiv">
+                <p>Max Attendees: </p>
+                <input class="TextInput" required type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
+              </div>
+
+              <div class="InputDiv">
+                <p>Location: </p>
+                <input class="TextInput" required style="width:200px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
+              </div>
+
+              <div style="visibility:hidden;">
+                <input type="text" name="exercise_list" id="form_exercise_list"/>
+              </div>
+
+              <div style="visibility:hidden;">
+                <input type="text" name="tags" id="tags"/>
+              </div>
+
+              <input class="InputButton" type="submit" value="Create New Event" />
+
             </div>
+          </form>
+          <div id="suggestion_wrapper">
+              <p style="margin-top: 0px;" class="SectionTitle">
+                Exercise Suggestions
+              </p>
+              <form class="FormStyle" id="tag_search_form">
+                <div class="InputDiv">
+                  <p>Activity Type: </p>
+                  <input class="TextInput" id="searchTag" type="text" name="tag" list="searchTagList"/><br>
+                  <datalist id="searchTagList">          
+                    <option value="cardio">cardio</option>
+                    <option value="olympic_weightlifting">olympic_weightlifting</option>
+                    <option value="plyometrics">plyometrics</option>
+                    <option value="powerlifting">powerlifting</option>
+                    <option value="strength">strength</option>
+                    <option value="stretching">stretching</option>
+                    <option value="strongman">strongman</option>
+                  </datalist>
+                </div>
 
-            <div class="InputDiv">
-              <p>Start Time: </p>
-              <input class="TextInput" required type="datetime-local" id="event_date" name="event_date" />
-            </div>
+                <div class="InputDiv">
+                  <p>Muscle: </p>
+                  <input class="TextInput" id="searchMuscle" type="text" name="muscle" list="muscleList" /><br>
+                  <datalist id="muscleList">        
+                    <option value="abdominals">abdominals</option>
+                    <option value="abductors">abductors</option>
+                    <option value="adductors">adductors</option>
+                    <option value="biceps">biceps</option>
+                    <option value="calves">calves</option>
+                    <option value="chest">chest</option>
+                    <option value="forearms">forearms</option>
+                    <option value="glutes">glutes</option>
+                    <option value="hamstrings">hamstrings</option>
+                    <option value="lats">lats</option>
+                    <option value="lower_back">lower_back</option>
+                    <option value="middle_back">middle_back</option>
+                    <option value="neck">neck</option>
+                    <option value="quadriceps">quadriceps</option>
+                    <option value="traps">traps</option>
+                    <option value="triceps">triceps</option>
+                  </datalist>
+                </div>
 
-            <div class="InputDiv">
-              <p>Max Attendees: </p>
-              <input class="TextInput" required type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
-            </div>
-
-            <div class="InputDiv">
-              <p>Location: </p>
-              <input class="TextInput" required style="width:200px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
-            </div>
-
-            <div style="visibility:hidden;">
-              <input type="text" name="exercise_list" id="form_exercise_list"/>
-            </div>
-
-            <div style="visibility:hidden;">
-              <input type="text" name="tags" id="tags"/>
-            </div>
-
-            <input class="InputButton" type="submit" value="Create New Event" />
-
+                <div class="InputDiv">
+                  <p>Difficulty: </p>
+                  <input class="TextInput" id="searchLevel" type="text" name="difficulty" list="levelList" />
+                  <datalist id="levelList">        
+                    <option value="beginner">beginner</option>
+                    <option value="intermediate">intermediate</option>
+                    <option value="expert">expert</option>
+                  </datalist>
+                </div>
+                <input class="InputButton" style="margin-top: 80px;" type="submit" value="Go!"/>
+              </form>
           </div>
-        </form>
+        </div>
+
+        <div id="activity_suggestions">
+          &nbsp;
+        </div>
 
         <p class="SectionTitle">
           Your activities
         </p>
         <hr class="line">
         <div id="activies">
-        </div>
-
-        <p class="SectionTitle">
-          Want suggestions?
-        </p>
-        <hr class="line">
-        <div id="suggestion_wrapper">
-            <form class="FormStyle" id="tag_search_form">
-              <div class="InputDiv">
-                <p>Activity Type: </p>
-                <input class="TextInput" id="searchTag" type="text" name="tag" list="searchTagList"/><br>
-                <datalist id="searchTagList">          
-                  <option value="cardio">cardio</option>
-                  <option value="olympic_weightlifting">olympic_weightlifting</option>
-                  <option value="plyometrics">plyometrics</option>
-                  <option value="powerlifting">powerlifting</option>
-                  <option value="strength">strength</option>
-                  <option value="stretching">stretching</option>
-                  <option value="strongman">strongman</option>
-                </datalist>
-              </div>
-
-              <div class="InputDiv">
-                <p>Muscle: </p>
-                <input class="TextInput" id="searchMuscle" type="text" name="muscle" list="muscleList" /><br>
-                <datalist id="muscleList">        
-                  <option value="abdominals">abdominals</option>
-                  <option value="abductors">abductors</option>
-                  <option value="adductors">adductors</option>
-                  <option value="biceps">biceps</option>
-                  <option value="calves">calves</option>
-                  <option value="chest">chest</option>
-                  <option value="forearms">forearms</option>
-                  <option value="glutes">glutes</option>
-                  <option value="hamstrings">hamstrings</option>
-                  <option value="lats">lats</option>
-                  <option value="lower_back">lower_back</option>
-                  <option value="middle_back">middle_back</option>
-                  <option value="neck">neck</option>
-                  <option value="quadriceps">quadriceps</option>
-                  <option value="traps">traps</option>
-                  <option value="triceps">triceps</option>
-                </datalist>
-              </div>
-
-              <div class="InputDiv">
-                <p>Difficulty: </p>
-                <input class="TextInput" id="searchLevel" type="text" name="difficulty" list="levelList" />
-                <datalist id="levelList">        
-                  <option value="beginner">beginner</option>
-                  <option value="intermediate">intermediate</option>
-                  <option value="expert">expert</option>
-                </datalist>
-              </div>
-              <input class="InputButton" style="margin: 32px 0px;" type="submit" value="Go!"/>
-            </form>
-            
-            <div id="activity_suggestions">
-              &nbsp;
-            </div>
         </div>
       </div>
     </div>

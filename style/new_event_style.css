@@ -143,7 +143,7 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 80%;
     z-index: 1;
     margin: 100px 0;
     border-radius: 40px;
@@ -224,9 +224,18 @@ html {
   cursor: pointer;
   border: none;
   color: white;
+  bottom: 0;
 }
 
 .InputButton:hover {
   background-color: rgb(224, 110, 200);
   transition: background-color 0.5s ease, color 0.5s ease;;
+}
+
+.FormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
