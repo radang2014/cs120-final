@@ -224,6 +224,7 @@ html {
   cursor: pointer;
   border: none;
   color: white;
+  bottom: 0;
 }
 
 .InputButton:hover {
