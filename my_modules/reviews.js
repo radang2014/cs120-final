@@ -14,6 +14,7 @@ exports.create_review = async function(req, res) {
 
     /* If not logged in, redirect to login */
     if (accounts.get_logged_in_username() == null) {
+        common.send_alert(req, res, "Please log in before submitting a review.");
         common.send_redirect(req, res, "/");
         return;
     }
