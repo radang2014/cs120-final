@@ -10,65 +10,56 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 
         <!-- CSS -->
-        <style type="text/css"></style>
+        <link rel="stylesheet" href="../style/login_style.css" >
     </head>
     <body>
-        <h1>Exercise Matching App</h1>
+        <div class="MainContainer" style="height:225vh;">
+            <div class="LoginContainer">
+                <div class="Image">
 
-        <p>Please submit your information below!</p>
-        
-        <form name="create_ad" method="get" action="process_create_ad" onsubmit="return validate()">
-            <div>
-                Business Name: <input type="text" name="name" />
+                </div>
+                <div class="SignIn">
+                    <form name="create_ad" method="get" action="process_create_ad" onsubmit="return validate()">
+                        <p>
+                            Advertisement Submission Form
+                        </p>
+                        <p class="smallText">Please submit your information below!</p>
+
+                        <input class="TextInput" id="Name" type="text" placeholder="Business Name..." name="name">
+                        <input class="TextInput" id="Website" type="text" placeholder="Business Website URL..." name="website">
+                        <input class="TextInput" id="Addr1" type="text" placeholder="Address Line 1..." name="addr1">
+                        <input class="TextInput" id="Addr2" type="text" placeholder="Address Line 2..." name="addr2">
+                        <input class="TextInput" style="width:40%" id="City" type="text" placeholder="City..." name="city">
+                        <input class="TextInput" style="width:20%" id="State" type="text" placeholder="State..." name="state">
+                        <input class="TextInput" style="width:30%" id="Zip" type="text" placeholder="Zip Code..." name="zip">
+                        
+                        <textarea class="ParagraphInput" id="Description" placeholder="Tell Us About Your Venue!" name="description"></textarea>
+
+                        <input class="TextInput" id="Tags" type="text" placeholder="Exercise Tags (please separate each tag with a comma, e.g.: lifting, swimming)..." name="exercises">
+
+                        <br /><br />
+                    
+                        <p class="smallText">
+                            Please select your pay tier below. Your pay tier affects the level of priority that your 
+                            advertisement will be given compared to other advertisements.
+                        </p>
+
+                        <select name="pay_tier">
+                            <option value="1" selected>Tier 1 - $200</option>
+                            <option value="2">Tier 2 - $80</option>
+                            <option value="3">Tier 3 - $55</option>
+                            <option value="4">Tier 4 - $30</option>
+                            <option value="5">Tier 5 - $10</option>
+                        </select> <br />
+
+                        <button class="LoginButton" type="submit" style="width:175px;">
+                            Submit Advertisement
+                        </button>
+                    </form>
+                </div>               
+                <p>Already have an account? Log in <a href="/login">here</a>.</p>
             </div>
-
-            <div>
-                Business Website URL: <input type="text" name="website" />
-            </div>
-
-            <div>
-                Address Line 1: <input type="text" name="addr1" />
-            </div>
-
-            <div>
-                Address Line 2: <input type="text" name="addr2" />
-            </div>
-
-            <div>
-                City: <input type="text" name="city" />
-                State: <input type="text" name="state" />
-                Zip: <input type="text" name="zip" />
-            </div>
-
-            <div>Tell Us About Your Venue:</div>
-            <textarea name="description" cols="50" rows="7"></textarea>
-
-            <div>
-                Tags for Common Exercises at Your Venue (please separate each tag with a single comma): <br />
-                (e.g. "swimming, biking") <br />
-                <input type="text" name="exercises" />
-            </div>
-
-            <p>
-                Please select your pay tier below. Your pay tier affects the level of priority that your 
-                advertisement will be given compared to other advertisements. Your business will receive 
-                a bill within three business days.
-            </p>
-            
-            <select name="pay_tier">
-                <option value="1" selected>Tier 1 - $200</option>
-                <option value="2">Tier 2 - $80</option>
-                <option value="3">Tier 3 - $55</option>
-                <option value="4">Tier 4 - $30</option>
-                <option value="5">Tier 5 - $10</option>
-            </select>
-
-            <br /><br />
-
-            <input type="submit" value="Submit Advertisement" />
-        </form>
-
-        <a href="/">Return to Home</a>
+        </div>
 
         <script>
             /* Form validation function */ 
