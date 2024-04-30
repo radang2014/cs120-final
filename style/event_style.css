@@ -1,0 +1,279 @@
+html {
+  background-color: #fffddeef;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  height: 100%;
+}
+
+body {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; */
+  margin: 0;
+  height: 100%;
+}
+
+nav {
+  /* margin-top: 100 px;  */
+  /* background-color: #FFFDD0; Cream color */
+  background-color: #fffddeef;
+  width: 100%;
+  border-bottom: 2px solid #000000;
+  /* Soft border */
+  /* border-top: 2px solid #000000; */
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav ul li:first-child {
+  float: left;
+}
+
+nav ul li {
+  float: right;
+}
+
+nav ul li a {
+  display: block;
+  padding: 20px 30px;
+  text-decoration: none;
+  color: #4D4D4D;
+  /* Soft gray color */
+  transition: background-color 0.5s ease, color 0.5s ease;
+  /* Smooth transition */
+}
+
+nav ul li a:hover {
+  background-color: #d3d0cc;
+  /* Lighter cream color on hover */
+  color: #333;
+  /* Darker gray text on hover */
+}
+
+
+.MainContainer {
+    position: relative;
+    width: 100%;
+    /* height:100%; */
+    display: flex;
+    justify-content: center;
+  }
+
+  .InfoContainer {
+    /* display: flex; */
+    /* background-color: #662713; */
+    background: linear-gradient(to bottom, #3f1122, rgb(109, 44, 28));
+    /* flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    height:900px;
+    width: 80%;
+    z-index: 1;
+    margin: 100px 0;
+    border-radius: 40px;
+    padding: 30px;
+  }
+
+  .BackgroundImage {
+    background-image: url('../pages/images/falltrees.jpg');
+    background-size: cover; 
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(10px);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .SectionTitle {
+    margin: 0;
+    padding: 0;
+    color: rgb(48, 16, 24);
+    /* margin-top: 100px; */
+    font-size: 20px;
+    
+  }
+
+#eventTitle {
+    font-size: 50px;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#eventText {
+    font-size: 24px;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.line {
+    width: 76%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 2px;
+    margin-bottom: 30px;
+}
+
+
+#eventTime {
+    font-size: 24px;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    align-items: center;
+}
+
+#attendees,
+#exerciseList,
+#map {
+  /* float: left; */
+  display:inline-block;
+    /* height:80%; */
+  /* width: 30%; */
+  /* background-color: #87e5de; */
+  background: linear-gradient(to bottom, rgb(224, 179, 112), #d44d81);
+  padding: 10px;
+  color: black;
+  margin: 20px;
+  text-align: center;
+  vertical-align: top;
+  border-radius: 20px;
+}
+
+.attendee {
+  width: 200px;
+  height: 75px;
+  background-color: #d9d9d9;
+  border-radius: 20px;
+  margin: 20px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 75px;
+  /* padding-left:50px; */
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+  float: left;
+  margin-left: 15px;
+  margin-top: 12.5px;
+  border: 1px solid black;
+}
+
+#eventTitle {
+  text-transform: capitalize;
+}
+
+#map {
+  padding: 25px;
+}
+
+#mapPic {
+  margin: 0 auto;
+  height: 400px;
+  width: 400px;
+}
+
+#locText {
+  padding: 5px;
+  text-align: left;
+  font-weight: 700;
+}
+
+
+.MainContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+#join_event {    
+    margin: 0;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 800;
+    background: linear-gradient(to right, rgb(255, 230, 198), #df29a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    border: none;
+    padding:25px;
+  /* width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #f0a00d;
+  text-align: center; */
+}
+
+button {
+  font-family: "Poppins", sans-serif;
+}
+
+.browse_event_item {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: white;
+  background-color: rgb(32, 125, 161);
+  border: none;
+  text-transform: capitalize;
+  width: 200px;
+  height: 350px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.browse_event_item p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.exerciseItem {
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #381b26;
+  color: #f8f8f8;
+  padding: 10px;
+  text-transform: capitalize;
+  font-weight:300;
+}
+
+.event_container {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  margin: auto;
+  flex-wrap: wrap;
+  background: linear-gradient(to )
+}
+
+.Username {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: white;
+  font-size: 30px;
+}
+
+.EventTag {
+
+}
+
+.EventLocation {}
+
+.EventAttendees {}

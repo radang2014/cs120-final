@@ -8,7 +8,7 @@
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
 	crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/style/style.css">
+  <link rel="stylesheet" href="/style/event_style.css">
 </head>
 <body>
     
@@ -22,21 +22,47 @@
         </ul>
     </nav>
 
-    <div id="eventTitle">&nbsp;</div>
-    <div id="eventText">&nbsp;</div>
-    <div id="attendees">&nbsp;</div>
-    <div id="exerciseList">&nbsp;</div>
+    <div class="MainContainer">
+        <div class="BackgroundImage"></div>
+        <div class="InfoContainer">          
+            <form name="join_event" method="get" action="process_join_event"></form>  
+            
+            <div id="eventTitle">&nbsp;</div>
+            <div id="eventTime">&nbsp;</div>
+            <div id="eventText">&nbsp;</div>
+            <div style="margin: auto 0;  text-align: center;">
+                <input type="submit" id="join_event" value="Join Event" />
+            </div>
+            
+            
+            
+            <div style="width:100%; height:500px; text-align:center">
+                <div id="attendees">&nbsp;</div>
+                <div id="exerciseList">&nbsp;</div>
+            
+    
+                <div id="map">
+                    <p class="SectionTitle">
+                        Where we'll be
+                    </p>
+                    <hr class="line">
+                    <div id="locText">&nbsp;</div>
+                    <img src="uploads/streetview.jpg" width="400px" height="400px" alt="Image"> 
+                    <div id="mapWidget"></div>       
+                </div>
+            </div>
 
-    <div id="map">
-        <div id="locText">&nbsp;</div>
-        <img src="uploads/streetview.jpg" width="400px" height="400px" alt="Image"> 
-        <div id="mapWidget"></div>       
+        
+            
+                <input type="text" id="event_id" name="event_id" style="visibility:hidden;"/>
+                
+            </form>
+
+        </div>
     </div>
 
-    <form name="join_event" method="get" action="process_join_event">
-        <input type="text" id="event_id" name="event_id" style="visibility:hidden;"/>
-        <input type="submit" id="join_event" value="Join Event" />
-    </form>
+
+
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);

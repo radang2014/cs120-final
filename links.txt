@@ -1,0 +1,5 @@
+Code on GitHub: https://github.com/radang2014/cs120-final
+
+App URL on Heroku: https://cs120final-02476e741fe3.herokuapp.com/
+
+Presentation Slides: https://docs.google.com/presentation/d/1qH43i0gXrnYJsLd81-rvvgQ0wQG2IJy34vefwRrpbbc/edit?usp=sharing

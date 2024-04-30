@@ -81,13 +81,18 @@ exports.serve_events_content = async function(req, res) {
             $ = cheerio.load( '<html><body>404 Not Found</body></html>')
             return undefined;
         }
-        $('#eventTitle').text(`${qdata.owner_info[0].firstname}'s ${qdata.tag[0]} Event`)
-        $('#eventText').text(qdata.description)
-        $('#locText').html(`${qdata.loc[0].name}<br>
+        $('#eventTitle').text(`${qdata.tag[0]} Event at ${qdata.loc[0].name}`)
+        $('#eventTime').text(`at ${qdata.event_date.toISOString().replace(/T/, ' ').
+        replace(/\..+/, '')}`)
+        $('#eventText').text(`"${qdata.description}"`)
+        $('#locText').html(`
                             ${qdata.loc[0].address.line1}<br>
                             ${qdata.loc[0].address.city}, ${qdata.loc[0].address.state} ${qdata.loc[0].address.zip}                            `
                         )
-        stn = `<b>Who's Coming</b>`;
+        stn = `<p class="SectionTitle">
+                Who's coming
+                </p>
+                <hr class="line">`;
         qdata.attendees.forEach(function(user) {            
             let fname = user.firstname;
             let icon = user.icon_filename;  
@@ -111,7 +116,10 @@ exports.serve_events_content = async function(req, res) {
         return events
     })
     .then(events => {
-        var exercise_elements = `Exercises:<br>`
+        var exercise_elements = `<p class="SectionTitle">
+        Exercises
+        </p>
+        <hr class="line">`;
         events.forEach(function(exercise) {
             let exname = exercise.name
             let type = exercise.type
