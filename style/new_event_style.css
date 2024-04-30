@@ -55,37 +55,21 @@ html {
   #meta_form_section {
     width: 100%;
     border-radius: 20px;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     padding: 0px;
     margin: 0px;
   }
 
-  #suggestion_wrapper {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
   #activies {
     width: 300px;  
     margin:25px;
     padding:10px;
     border-radius: 20px;
   }
-  
-  #activity_suggestions {
-    width: 100%;  
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+
 
   #adverts {
     width: 90%;
@@ -95,25 +79,45 @@ html {
     flex-wrap: wrap;
   }
 
+  /* .activityEntered {
+    color: white;
+    background-color: rgb(101, 103, 104);
+    text-align: center;
+    border: none;
+    align-content: center;
+    width: 140px;
+    height:100px;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 5px;
+    float:left;
+    
+  }   */
+
   .activitySuggestion, .activityEntered {
     color: white;
     background-color: rgb(101, 103, 104);
     text-align: center;
     border: none;
-    width: 200px;
+    font-size: 8pt;
+    line-height: 1.2;
+    align-content: center;
+    width: 100px;
+    height:80px;
     border-radius: 20px;
     margin: 10px;
-    padding: 25px;
+    padding: 8px;
+    float:left;
   }  
   
   .ad_item {
     color: white;
-    background-color: rgb(101, 103, 104);
+    background-color: #973e84;
     width: 200px;
     text-align: center;
     border: none;
     border-radius: 20px;
-    margin: 10px;
+    margin: 10px 0;
     padding: 25px;
   }
 
@@ -141,13 +145,19 @@ html {
     display: flex;
     background-color: #363636;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
+    /* /* justify-content:center; */
+    align-items:center; 
+    vertical-align: top;
+    width: 70%;
     z-index: 1;
-    margin: 100px 0;
+    margin: 100px 10px;
     border-radius: 40px;
-    padding: 30px;
+    padding: 50px 30px;
+  }
+
+  #adbar {
+    width:15%;
+    padding: 0;
   }
 
   .MainTitle {
@@ -172,14 +182,14 @@ html {
     border-style: solid;
     border-color: white;
     border-radius: 2px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .SectionTitle {
   margin: 0;
   padding: 0;
   color: rgb(224, 110, 200);
-  margin-top: 100px;
+  margin-top: 50px;
   font-size: 20px;
   
 }
@@ -238,4 +248,38 @@ html {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.YourActivities {
+  width:30%;  
+  height:500px; 
+  display:inline-block;  
+  vertical-align: top;
+  padding:0;
+  margin:0;
+}
+
+.SuggestedActivitiesGroup{
+  width:69%;  
+  height:500px; display:inline-block; vertical-align: top;
+}
+
+#SuggestionFormWrapper {
+  width:50%; 
+  height:500px; 
+  display:inline-block; 
+  vertical-align: top;
+}
+
+.SuggestionResults {
+  width:49%; 
+  height:500px; 
+  display:inline-block; 
+  vertical-align: top;
+}
+
+.activity_suggestions {
+  display:inline-block; 
+  vertical-align: top;
+
 }

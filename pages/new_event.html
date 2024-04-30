@@ -37,39 +37,33 @@
         </p>
         <p class="gradient-text">
           Someone New.
-        </p>
-
-        <p class="SectionTitle">
-          Check us out!
-        </p>
-        <hr class="line">
-
-        <div id="adverts"></div>
+        </p>        
         <p class="SectionTitle">
           About your Event
         </p>
         <hr class="line">
+        
         <div class="FormContainer">
           <form class="FormStyle" name="create_event" method="get" action="process_create_event">        
             <div id="meta_form_section">
               <div class="InputDiv">
-                  <p>Event Description: </p>
+                  Event Description:
                   <input class="TextInput" type="text" name="description" />
               </div>
 
               <div class="InputDiv">
-                <p>Start Time: </p>
+                Start Time:
                 <input class="TextInput" required type="datetime-local" id="event_date" name="event_date" />
               </div>
 
               <div class="InputDiv">
-                <p>Max Attendees: </p>
+                Max Attendees:
                 <input class="TextInput" required type="number" name="max" step="1" min="2" max="100" pattern="[0-9]"/>
               </div>
 
               <div class="InputDiv">
-                <p>Location: </p>
-                <input class="TextInput" required style="width:200px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
+                Location:
+                <input class="TextInput" required style="width:500px;" type="text" id="autocomplete" placeholder="Enter a location" autocomplete="off" name="location" />
               </div>
 
               <div style="visibility:hidden;">
@@ -80,14 +74,33 @@
                 <input type="text" name="tags" id="tags"/>
               </div>
 
-              <input class="InputButton" type="submit" value="Create New Event" />
+              <input class="InputButton" type="submit" value="Create New Event" style="width:100%; margin: 0 auto;"/>
 
             </div>
           </form>
-          <div id="suggestion_wrapper">
-              <p style="margin-top: 0px;" class="SectionTitle">
-                Exercise Suggestions
+          
+        </div>
+
+        
+        
+        <!--  -->
+        <div style="width:100%; height:500px; text-align:center;">
+
+          <div class="YourActivities" >
+              <p class="SectionTitle" style="width:100%">
+                Your activities
               </p>
+              <hr class="line">
+              <div id="activies" style="border:white; display:inline-block; width:100%;, align-contents:center;"></div>
+          </div>
+      
+          <div class="SuggestedActivitiesGroup">
+            <p class="SectionTitle">
+              Exercise Suggestions
+            </p>
+            <hr class="line">
+
+            <div id="SuggestionFormWrapper">
               <form class="FormStyle" id="tag_search_form">
                 <div class="InputDiv">
                   <p>Activity Type: </p>
@@ -102,7 +115,7 @@
                     <option value="strongman">strongman</option>
                   </datalist>
                 </div>
-
+    
                 <div class="InputDiv">
                   <p>Muscle: </p>
                   <input class="TextInput" id="searchMuscle" type="text" name="muscle" list="muscleList" /><br>
@@ -125,7 +138,7 @@
                     <option value="triceps">triceps</option>
                   </datalist>
                 </div>
-
+    
                 <div class="InputDiv">
                   <p>Difficulty: </p>
                   <input class="TextInput" id="searchLevel" type="text" name="difficulty" list="levelList" />
@@ -137,20 +150,27 @@
                 </div>
                 <input class="InputButton" style="margin-top: 80px;" type="submit" value="Go!"/>
               </form>
+            </div>
+
+            <div class="SuggestionResults">
+              <div id="activity_suggestions">
+                &nbsp;
+              </div>
+            </div>
           </div>
-        </div>
+    </div>
 
-        <div id="activity_suggestions">
-          &nbsp;
-        </div>
+      </div>
 
+      <div class="InfoContainer" id="adbar">
         <p class="SectionTitle">
-          Your activities
+          Check us out!
         </p>
         <hr class="line">
-        <div id="activies">
-        </div>
+
+        <div id="adverts"></div>
       </div>
+
     </div>
 
   <script>
@@ -177,7 +197,7 @@
           let name = exercise.name
           let type = exercise.type
           let level = exercise.difficulty
-          activities += `<div class='activitySuggestion' id='${name}' tagtype='${type}'>${name}<br>Type: ${type}<br>Difficulty: ${level}</div>`
+          activities += `<div class='activitySuggestion' id='${name}' tagtype='${type}'>${name}<br>Type: ${type}<br>${level}</div>`
         })
         $('#activity_suggestions').html(activities)
         $( ".activitySuggestion" ).on( "click", function() {
