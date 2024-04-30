@@ -42,9 +42,34 @@
             <li><a href="$PROFILE_LINK">$PROFILE_TEXT</a></li>
             <li><a href="/new_event">Create New Events</a></li>
             <li><a href="/browse_event">Browse Events</a></li>
-            <li><a href="/">Home</a></li>
+            <div class="ham-menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </ul>
         </nav>
+        <div class="off-screen-menu">
+          <ul>
+            <li><a style="font-style: italic; color: gray;" href="/">FitFriends</a></li>
+            <li><a href="$LOGIN_LINK">$LOGIN_TEXT</a></li>
+            <li><a href="$PROFILE_LINK">$PROFILE_TEXT</a></li>
+            <li><a href="/new_event">Create New Events</a></li>
+            <li><a href="/browse_event">Browse Events</a></li>
+            <li><a href="/">Home</a></li>
+          </ul>
+        </div>
+    
+        <script>
+          const hamMenu = document.querySelector(".ham-menu");
+    
+          const offScreenMenu = document.querySelector(".off-screen-menu");
+    
+          hamMenu.addEventListener("click", () => {
+            hamMenu.classList.toggle("active");
+            offScreenMenu.classList.toggle("active");
+          });
+        </script>
 
         <div class="banner">
           <img src="pages/images/Test.jpg" alt="Banner Image">
