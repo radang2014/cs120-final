@@ -2,6 +2,7 @@
 
 ### App URL
 Access the app here: [https://cs120final-02476e741fe3.herokuapp.com/](https://cs120final-02476e741fe3.herokuapp.com/)
+**NOTE: As of May 17th, 2024, the site has been powered down. If you'd like to access the app, clone a local copy, install NodeJS, install all dependencies in `package.json`, and run `node app.js`.**
 
 ### Implementation Notes 
  * `app.js` is the driver that figures out what the current "view" of the app is and calls the appropriate function 
